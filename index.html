@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Submit a form via AJAX</title>
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
+      <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+</head>
+<body>
+    <script>
+        function onSuccess(data)
+        {
+           // data = $.trim(data);
+           // $("#notification").html(data);
+		   alert(data);
+		   if (data==1)
+			window.location.replace("#page2");
+        }
+  
+        function onError(data, status)
+        {
+            // handle an error
+        }        
+  
+        $(document).ready(function() {
+            $("#submit").click(function(){
+  
+                var formData = $("#callAjaxForm").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "callajax.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess,
+                    error: onError
+                });
+  
+                return false;
+            });
+        });
+    </script>
+  
+    <!-- call ajax page -->
+    <div data-role="page" id="callAjaxPage">
+        <div data-role="header">
+            <h1>Call Ajax</h1>
+        </div>
+  
+        <div data-role="content">
+            <form id="callAjaxForm">
+                <div data-role="fieldcontain">
+                    <label for="firstName">User Name</label>
+                    <input type="text" name="firstName" id="firstName" value=""  />
+ 
+                    <label for="lastName">Password</label>
+                    <input type="password" name="lastName" id="lastName" value=""  />
+                    <h3 id="notification"></h3>
+                    <button data-theme="b" id="submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+  
+        <div data-role="footer">
+            <h1>GiantFlyingSaucer</h1>
+        </div>
+    </div>
+    <div data-role="page" id="page2">
+	<div data-role="header">
+    	<a href="index.html">Back</a>
+		<h1>Page Two</h1>
+	</div>
+	<div data-role="content">	
+		Content		
+	</div>
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div>
+</div>
+</body>
+</html>
