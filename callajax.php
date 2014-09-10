@@ -4,8 +4,8 @@
 
 //Baza i username i password
 $baza = "gaudeam_knex2013";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$korisnik = "gaudeam";
+$lozinka = "OF9002089ir.";
 
 $spoj = mysql_connect("178.218.164.4","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
