@@ -3,6 +3,7 @@
     <head>
     <title>Submit a form via AJAX</title>
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
+      <link href="css/mobile.css" rel="stylesheet" type="text/css">
       <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
 </head>
@@ -10,11 +11,11 @@
     <script>
         function onSuccess(data)
         {
-           // data = $.trim(data);
+            //data = $.trim(data);
            // $("#notification").html(data);
-		   alert("Greška");
+		   alert(data);
 		   if (data==1)
-			window.location.replace("#page2");
+			window.location.replace("druga.html");
         }
   
         function onError(data, status)
@@ -65,17 +66,6 @@
             <h1>GiantFlyingSaucer</h1>
         </div>
     </div>
-    <div data-role="page" id="page2">
-	<div data-role="header">
-    	<a href="index.html">Back</a>
-		<h1>Page Two</h1>
-	</div>
-	<div data-role="content">	
-		Content		
-	</div>
-	<div data-role="footer">
-		<h4>Page Footer</h4>
-	</div>
-</div>
+    
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 body {
 	background-color: #f1e7dc;
+	height: 100%;
 }
 .ui-content {
 	background-color: #f1e7dc;
@@ -12,4 +13,26 @@ body {
 }
 .ui-content h5 {
 	margin-top:35px;	
+}
+div.ui-content > ul {
+	list-style-type: none;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 40px;
+	width: 100%;
+}
+div.ui-content > ul li {
+	display: block;
+	padding: 0px;
+	height: 50px;
+	width: 50px;
+	float: left;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+}
+div.ui-content {
+	margin-right: auto;
+	margin-left: auto;
 }
