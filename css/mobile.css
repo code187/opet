@@ -20,6 +20,12 @@ div.ui-content > ul {
 	margin-right: auto;
 	margin-left: auto;
 	width: 100%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
 }
 div.ui-content > ul li {
 	padding: 0px;
@@ -55,10 +61,15 @@ div.ui-content > ul li p {
 	border-bottom:none;
 }
 #drugastranica > div.ui-bar-a.ui-footer{
-	position: absolute;
 	bottom: 0px;
+	margin-top: 50px;
 }
 #drugastranica > div.ui-bar-a.ui-footer a{
 	color: #FFF;
 	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+}
+.zadnji {
+	margin-bottom:80px;
 }
