@@ -1,38 +1,64 @@
 @charset "utf-8";
 
-body {
-	background-color: #f1e7dc;
-	height: 100%;
-}
 .ui-content {
 	background-color: #f1e7dc;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	padding:0;
 }
-.ui-content img {
-	float:left;
-	margin-right:15px;	
+.ui-body-c {
+	background-color: #f1e7dc;
+	background-image:none;
 }
-.ui-content h5 {
-	margin-top:35px;	
+.ui-header {
+	text-align: center;	
 }
 div.ui-content > ul {
 	list-style-type: none;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 40px;
 	width: 100%;
 }
 div.ui-content > ul li {
-	display: block;
 	padding: 0px;
-	height: 50px;
-	width: 50px;
+	width: 70px;
 	float: left;
-	margin-top: 0px;
-	margin-right: 5px;
-	margin-bottom: 0px;
-	margin-left: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
-div.ui-content {
-	margin-right: auto;
-	margin-left: auto;
+div.ui-content > ul li p {
+	margin: 0px;
+	padding: 0px;	
+}
+#callAjaxForm > div{
+	height: 100%;
+	padding-top: 25%;
+	padding-bottom: 25%;
+}
+.logo {
+	float:left;
+}
+#callAjaxPage > div.ui-bar-a.ui-footer {
+	position: absolute;
+	bottom: 0px;
+}
+#callAjaxPage > div.ui-bar-a.ui-footer a{
+	color: #FFF;
+	text-decoration: none;	
+}
+.ui-br {
+	border-bottom:none;
+}
+#drugastranica > div.ui-bar-a.ui-footer{
+	position: absolute;
+	bottom: 0px;
+}
+#drugastranica > div.ui-bar-a.ui-footer a{
+	color: #FFF;
+	text-decoration: none;
 }

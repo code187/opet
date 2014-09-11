@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Submit a form via AJAX</title>
+    <title>Gaudeamus-Knex</title>
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
       <link href="css/mobile.css" rel="stylesheet" type="text/css">
       <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+    <meta charset="utf-8">
 </head>
 <body>
     <script>
@@ -13,7 +14,7 @@
         {
             //data = $.trim(data);
            // $("#notification").html(data);
-		   alert(data);
+		  
 		   if (data==1)
 			window.location.replace("druga.html");
         }
@@ -45,25 +46,26 @@
     <!-- call ajax page -->
     <div data-role="page" id="callAjaxPage">
         <div data-role="header">
-            <h1>Call Ajax</h1>
+          <img class="logo" src="images/logo3.png">
+            <p>Gimnazija Gaudeamus</p>
         </div>
   
         <div data-role="content">
             <form id="callAjaxForm">
                 <div data-role="fieldcontain">
-                    <label for="firstName">User Name</label>
+                    <label for="firstName">Korisničko ime</label>
                     <input type="text" name="firstName" id="firstName" value=""  />
  
-                    <label for="lastName">Password</label>
+                    <label for="lastName">Lozinka</label>
                     <input type="password" name="lastName" id="lastName" value=""  />
                     <h3 id="notification"></h3>
-                    <button data-theme="b" id="submit" type="submit">Submit</button>
+                    <button data-theme="b" id="submit" type="submit">Prijava</button>
                 </div>
             </form>
         </div>
   
         <div data-role="footer">
-            <h1>GiantFlyingSaucer</h1>
+            <h1>&reg; <a href="http://ofir.hr/">Ofir</a></h1>
         </div>
     </div>
     
