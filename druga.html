@@ -6,15 +6,36 @@
       <link href="css/mobile.css" rel="stylesheet" type="text/css">
       <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+    
     <meta charset="utf-8">
+    <script>
+$(document).ready(function(){
+    $.post("druga.php",
+    {
+    x :sessionStorage.getItem("x")
+	 },
+	
+    function(data,status){
+		var x=document.getElementById("naslov");
+      	//alert(data);
+		alert;
+		data = jQuery.parseJSON(data);
+		console.log(data);
+		//alert(data.puno);
+        $("#naslov").text(data.puno);
+		
+    });
+  });
+			
+</script>
 </head>
-<body>
+<body onload="function()">
+
     <div data-role="page" id="drugastranica">
         <div data-role="header">
         <img class="logo" src="images/logo3.png">
-            <p>Gimnazija Gaudeamus</p>
+        <p id="naslov"></p>
         </div>
-  
         <div data-role="content">
         <ul>
         	<li><img src="images/biologija.png"><p>Biologija</p></li>

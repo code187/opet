@@ -10,18 +10,24 @@
 </head>
 <body>
     <script>
+	
         function onSuccess(data)
         {
-            //data = $.trim(data);
-           // $("#notification").html(data);
-		  
-		   if (data==1)
-			window.location.replace("druga.html");
+           data = $.trim(data);
+           $("#notification").html(data);
+		   sessionStorage.setItem("x", data);
+			
+	
+if(isNaN(data)){
+
+}else{
+				
+			window.location.replace("provjera.php");
         }
-  
+  }
         function onError(data, status)
         {
-            // handle an error
+           
         }        
   
         $(document).ready(function() {
@@ -31,7 +37,7 @@
   
                 $.ajax({
                     type: "POST",
-                    url: "http://gaudeamus.hr/mobile/callajax.php",
+                    url: "callajax.php",
                     cache: false,
                     data: formData,
                     success: onSuccess,
@@ -41,8 +47,8 @@
                 return false;
             });
         });
+		
     </script>
-  
     <!-- call ajax page -->
     <div data-role="page" id="callAjaxPage">
         <div data-role="header">
