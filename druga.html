@@ -9,10 +9,11 @@
     
     <meta charset="utf-8">
     <script>
+	 var ix =sessionStorage.getItem("x")
 $(document).ready(function(){
     $.post("druga.php",
     {
-    x :sessionStorage.getItem("x")
+   		x:$ix
 	 },
 	
     function(data,status){
