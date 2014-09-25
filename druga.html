@@ -20,9 +20,11 @@
 		var x=document.getElementById("naslov");
       	//alert(data);
 		//alert;
-		data = jQuery.parseJSON(data);
+		$("#tijelo").html(data);
+		//data = jQuery.parseJSON(data);
 		console.log(data);
 		//alert(data.puno);
+		 
         $("#naslov").text(data.puno);
 		
     });
@@ -38,29 +40,8 @@
         <p id="naslov"></p>
         </div>
         <div data-role="content">
-        <ul>
-        	<li><img src="images/biologija.png"><p>Biologija</p></li>
-            <li><img src="images/engleski.png"><p>Engleski</p></li>
-            <li><img src="images/etika.png"><p>Etika</p></li>
-            <li><img src="images/filozofija.png"><p>Filozofija</p></li>
-            <li><img src="images/fizika2.png"><p>Fizika</p></li>
-            <li><img src="images/geografija.png"><p>Geografija</p></li>
-            <li><img src="images/glazbeni.png"><p>Glazbeni</p></li>
-            <li><img src="images/gospodarstvo.png"><p>Gospodarstvo</p></li>
-            <li><img src="images/grcki.png"><p>Grčki</p></li>
-            <li><img src="images/hrvatski.png"><p>Hrvatski</p></li>
-            <li><img src="images/informatika.png"><p>Informatika</p></li>
-            <li><img src="images/kemija.png"><p>Kemija</p></li>
-            <li><img src="images/latinski.png"><p>Latinski</p></li>
-            <li><img src="images/likovni.png"><p>Likovni</p></li>
-             <li><img src="images/logika.png"><p>Logika</p></li>
-            <li><img src="images/matematika.png"><p>Matematika</p></li>
-            <li><img src="images/njemacki.png"><p>Njemački</p></li>
-            <li><img src="images/politika.png"><p>Politika</p></li>
-            <li><img src="images/povijest.png"><p>Povijest</p></li>
-            <li><img src="images/psihologija.png"><p>Psihologija</p></li>
-            <li><img src="images/tjelesni.png"><p>Tjelesni</p></li>
-            <li><img src="images/vjeronauk.png"><p>Vjeronauk</p></li>
+        <ul id="tijelo">
+        	
            
         </ul>
         

@@ -36,6 +36,12 @@ div.ui-content > ul li {
 	text-align: center;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	font-size: 9px;
+	height: 90px;
+}
+div.ui-content > ul li a{
+	color: #000;
+	text-decoration: none;	
 }
 div.ui-content > ul li p {
 	margin: 0px;
