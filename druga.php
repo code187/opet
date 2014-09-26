@@ -9,9 +9,9 @@
     $firstName = $_POST['x'];
 
 //Baza i username i password
-$baza = "gaudeam_knex2013";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
@@ -21,8 +21,8 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
 $in=mysql_fetch_array($check);
  //Gives error if user dosen't exist
-include_once ("http:gaudeamus.hr/mobile/postavke.php");
-include "http:gaudeamus.hr/mobile/funkcije.php";
+include_once ("postavke.php");
+include "funkcije.php";
 $idk = $in['x'];
 if ($idk!="")
 	{
@@ -97,7 +97,7 @@ if ($idk!="")
 				}
 			if ($prava_postavke=="1" or $prava_postavke=="4") //ako su ucenik ili roditelj neka vide konzultacije
 			/*echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";*/
-			echo "<ul><li><img src=$slika id='showmenu'/></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
+			echo "<ul id=ucenik><li><img src=$slika id='showmenu'/></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
 				<ul>
@@ -117,7 +117,7 @@ if ($idk!="")
 </script>";
 			else
 			echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=napomena&m=nastava&idk=$idk rel=icon2>Napomena o u&#269;eniku</a><a href=admin.php?p=vise_ucenika&m=nastava&idk=$idk rel=icon2>Sve ocjene</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";
-				echo "<br><table id=tablica_lijevo>";
+				echo "<ul id=predmeti>";
 				//pronadi sve dostupne predmete razreda i ispiši ih, a na klik se otvaraju detalji o svakom predmetu
 				$a="SELECT ime,id,replace(replace(replace(replace(replace(ime,'&#268;','Cxx'),'&Scaron;','Sx'),'&#381;','Zx'),'&#272;','Dx'),'&#262;','Cx') sortiraj FROM conf_predmeta where asst='$razred' ORDER BY sortiraj ASC";	
 				//echo $a;
@@ -224,6 +224,7 @@ if ($idk!="")
 								else {
 								$broj_zadnjih =1; $preskoci=1; }
 							}
+							
 							//echo "$broj_zadnjih - $zadnji_user";
 							/*if ($prava_postavke=="3" or $prava_postavke=="2") //admin i nastavnik nikada ne preskacu!
 							$preskoci=0;*/
@@ -244,6 +245,7 @@ if ($idk!="")
 								
 							//profesor tog predmeta je user i ako je zadnji pisao != $usrer ofarbaj sve to crveno
 							//echo "njah $zadnji_pisao";
+							
 							$zadnji_user=explode(",",$pogledao);
 								if ($jelirazrednik>0)
 									{
@@ -262,12 +264,15 @@ if ($idk!="")
 								}
 							
 							//echo "la $tko_pogledao_izvjestaj";
+							
 							if ($prava_postavke=="1" or $prava_postavke=="4" or $prava_postavke=="3" or $prava_postavke=="2") //ako su ucenici ili roditelji samo crveni i nepregledane izvještaje
 							{
 								if ($preskoci=="1") 
 								{
-									if ($upok!="1")				
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></p></td>";
+									if ($upok!="1")
+													
+									echo "<li><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";
+									
 									else
 									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></p></td>";
 								}
@@ -292,17 +297,18 @@ if ($idk!="")
 								$brojim++;
 						}
 					}
-					echo "</tr>";	
+					echo "</ul>";	
 					}
 			}
 		else
 			echo "<span class=podnaslovi>Uneseni korisnik nije u&#269;enik!</span>";
-	echo "</table><br>";
+	echo "<div style=clear:both></div>";
 	
 	$prava_kor = $in['prava'];
 	$a = "select * from forum_postovi where prip = 'u-$idk' order by id desc";
 //echo $a;
 
+echo "<ul id=postovi>";
 
 $rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice postova!</span>");
 
@@ -384,11 +390,13 @@ while ($re = mysql_fetch_array($rez))
 					$pt_tko = str_replace("ž","&#382;",$pt_tko);
 					$pt_tko = str_replace("Ž","&#382;",$pt_tko);
 					//dodaj donji border kada su drugacije ofarbani
+					
 					if ($tko_sm=="2" or $tko_sm=="3" or $tko_sm=="4") //nastavnik
 					echo "<td align=left valign=middle width=70% height=25 style='border-bottom:1px solid #b9b9b9;'>$pt_opis</td><td valign=top width=10% style='border-bottom:1px solid #b9b9b9;'>$pt_kada</td><td style='border-bottom:1px solid #b9b9b9;'><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
 					else
-					echo "<td align=left valign=middle width=70% height=25>$pt_opis</td><td valign=top width=10%>$pt_kada</td><td><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
+					echo "<li><img src=$slika width=40 border=0>$pt_tko<br>$pt_kada</li><div style=clear:both></div><li class=poruka>$pt_opis</li>";
 				}
+			echo "</ul>";	
 ?>
 <SCRIPT LANGUAGE="JavaScript">
 $('.jsonic').editable('moduli/nastava/snimi_post_brzo.php?user=<?php echo $user; ?>', { 
@@ -401,9 +409,10 @@ $('.jsonic').editable('moduli/nastava/snimi_post_brzo.php?user=<?php echo $user;
     }
 			});
 		
-</script>          
+</script> 
+         
 <?php
-	include("http://gaudeamus.hr/mobile/post.php");
+	include("post.php");
 	
 	
 	
