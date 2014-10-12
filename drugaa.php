@@ -267,21 +267,21 @@ if ($idk!="")
 								{
 									if ($upok!="1")	
 									//OVDJE MI NE RADI EHO OD ID-A			
-									echo "<li><a onclick=SendTo_$id(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma><img src='images/$slikapredmeta'><br><font color=red>$puno_ime</a></font></li><script language='javascript'>
+									echo "<li><a onclick=SendTo_$id(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma><img src='images/$slikapredmeta'><br><font color=red>$puno_ime</a></font></li><script language='javascript'>
    function SendTo_$id(){
-       window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+       window.location=\"http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
     }
 </script>";			
 									else
-									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
+									echo "<li><a href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
 								}
 								else 
 								{
 									if ($zadnji_pisao!=$user)				
-									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
+									echo "<li><a href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
 									else
 									//OVDJE NEGDJE JE GREŠKA
-									echo "<li><a onclick=SendTo_$id(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
+									echo "<li><a onclick=SendTo_$id(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
    function SendTo_$id(){
         window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
     }
