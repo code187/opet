@@ -1,16 +1,28 @@
 <?php 
+/* Postavka za Sofa softver...*/
+
+//Naziv projekta, stranice, tvrtke za koju je sofa prilagodena
+
+$projekt = "KNEX - sustav za potporu u obrazovanju";
+$web = "http://www.gaudeamus.hr/knex";
+$prilagodeno = "Gimnazija Gaudeamus, Osijek";
+
+//Uvijek uzmi varijable koje se nude :)
+
+foreach( $_POST as $key => $value ) {
+     $$key = $value;
+}
+foreach( $_GET as $key => $value ) {
+     $$key = $value;
+}
+$user = $_POST['x'];
+
 //Baza i username i password
-$baza = "gaudeam_knex";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
-$spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
-
-$baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 
 
-$check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
-$info = mysql_fetch_array( $check );
-$user = $info['korisnik'];
 //Postavke uploada slike za vijesti
 $upload= "800";  //u kb
 $vrsta = "image/pjpeg"; //koji format slike
@@ -18,6 +30,9 @@ $sirina = "200px"; //koliko px širine je potrebno za vijesti
 $direk = "doc/fotke"; //u koji folder stavljaš fotke za vijesti u folderu BACK
 
 
+//Spajanje na bazu
+$spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
+$baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
 
 //provjeri prava korisnika
 $upis = "select * from korisnici where x='$user'";
@@ -83,7 +98,7 @@ while ($repa = mysql_fetch_array($rezultat))
 			}
 		else
 			{
-				$nova = date('U') + "9000";
+				$nova = date(U) + "9000";
 				$sesija_duze = "UPDATE korisnici SET sesija = '$nova'  WHERE x = '$user'";
 				$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce produljiti sesiju za korisnika</span>");
 			}
@@ -118,7 +133,26 @@ $direk_seminar = "doc"; //u koji folder stavljaš seminare folderu BACK
 
 
 		//napraviti korisnika, admin, super user
-	
+	if ($prava_postavke == "1")
+		{
+		if ($m=="seminar" or $m=="korisnici" or $m=="vjezbe" or $m=="kolokvij" or $m=="" or $m=="conf" or $m=="pm" or $m=="dokumenti" or $m=="chat" or $m=="forum"or $m=="chat/room" or $m=="natjecaji" or $m=="vijesti" or $m=="nastava" or $m=="kalendar" or $m=="opa" ) //ovlašteni folderi
+			{
+				if ($p=="uploadsem" or $p=="uploadsem1" or $p=="uv1" or $p=="uv2" or $p=="pregled" or $p=="provjeriju" or $p=="prijava" or $p=="urediga_korisnik" or $p=="prijava" or $p=="" or $p=="seminari" or $p=="pm" or $p=="pm_pisi" or $p=="pm_nova" or $p=="pm_citaj" or $p=="detalji_prof" or $p=="detalji" or $p=="doc" or $p=="up" or $p=="up1" or $p=="detalji_asst" or $p=="chat" or $p=="index" or $p=="soba_nova" or $p=="forum" or $p=="kategorije" or $p=="post" or $p=="kategorija_nova" or $p=="kategorija_uredi" or $p=="dodaj2" or $p=="natjecaji" or $p=="donatori" or $p=="ops1" or $p=="arhiva" or $p=="ucenik" or $p=="ucenik_detalji" or $p=="kal" or $p=="ocjene_plan" or $p=="konzultacije"  or $p=="ispuni_izostanke1" or $p=="up_up" or $p=="up1_up") //ovlašteni fajlovi 
+					{
+						echo ""; 
+					}
+				else
+					{
+					echo "<b>Nemate pravo pristupa na ovaj dio sustava!</b>" ;
+					die;
+					}
+			}
+			else
+				{
+				echo "<b>Nemate pravo pristupa na ovaj dio sustava!</b>" ;
+				die;
+				}
+		}
 	if ($prava_postavke =="1" or $prava_postavke =="2" or $prava_postavke =="4"  ) //nadi gdje sve studnet sudjeluje :)
 		{	
 		if ($prava_postavke=="1") //ucenik

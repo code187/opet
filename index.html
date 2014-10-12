@@ -16,7 +16,7 @@
            data = $.trim(data);
            $("#notification").html(data);
 		   sessionStorage.setItem("x", data);
-			
+		
 	
 if(isNaN(data)){
 
@@ -37,7 +37,7 @@ if(isNaN(data)){
   
                 $.ajax({
                     type: "POST",
-                    url: "http://gaudeamus.hr/mobile/callajax.php",
+                    url: "callajax.php",
                     cache: false,
                     data: formData,
                     success: onSuccess,

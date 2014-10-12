@@ -3,9 +3,9 @@
     $lastName = $_POST['lastName'];
 
 //Baza i username i password
-$baza = "gaudeam_knex";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 

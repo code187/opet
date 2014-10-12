@@ -528,7 +528,7 @@ function cleanInput($data)
 
 function charset_decode_utf_8 ($string) {
       /* Only do the slow convert if there are 8-bit characters - najbolja skripta za HR slova i konverziju u SQL :) */
-    if (! ereg("[\200-\237]", $string) and ! ereg("[\241-\377]", $string))
+    if (! preg_match("[\200-\237]", $string) and ! preg_match("[\241-\377]", $string))
         return $string;
     // decode three byte unicode characters
     $string = preg_replace("/([\340-\357])([\200-\277])([\200-\277])/e",       
