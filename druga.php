@@ -6,12 +6,13 @@
     });
 </script>
 <?php
+//error_reporting(0);
     $firstName = $_POST['x'];
 
 //Baza i username i password
-$baza = "gaudeam_knex";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
@@ -117,6 +118,7 @@ if ($idk!="")
 </script>";
 			else
 			echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=napomena&m=nastava&idk=$idk rel=icon2>Napomena o u&#269;eniku</a><a href=admin.php?p=vise_ucenika&m=nastava&idk=$idk rel=icon2>Sve ocjene</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";
+			
 				echo "<ul id=predmeti>";
 				//pronadi sve dostupne predmete razreda i ispiši ih, a na klik se otvaraju detalji o svakom predmetu
 				$a="SELECT ime,id,replace(replace(replace(replace(replace(ime,'&#268;','Cxx'),'&Scaron;','Sx'),'&#381;','Zx'),'&#272;','Dx'),'&#262;','Cx') sortiraj FROM conf_predmeta where asst='$razred' ORDER BY sortiraj ASC";	
@@ -245,7 +247,7 @@ if ($idk!="")
 								
 							//profesor tog predmeta je user i ako je zadnji pisao != $usrer ofarbaj sve to crveno
 							//echo "njah $zadnji_pisao";
-							
+							$jelirazrednik = 0;
 							$zadnji_user=explode(",",$pogledao);
 								if ($jelirazrednik>0)
 									{
@@ -269,31 +271,44 @@ if ($idk!="")
 							{
 								if ($preskoci=="1") 
 								{
-									if ($upok!="1")
-													
-									echo "<li><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";
-									
+									if ($upok!="1")	
+									//OVDJE MI NE RADI EHO OD ID-A			
+									echo "<li><a onclick=SendTo_$id(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma><img src='images/$slikapredmeta'><br><font color=red>$puno_ime</a></font></li><script language='javascript'>
+   function SendTo_$id(){
+       window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+    }
+</script>";			
 									else
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></p></td>";
+									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
 								}
 								else 
 								{
 									if ($zadnji_pisao!=$user)				
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></p></td>";
+									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
 									else
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></p></td>";
+									//OVDJE NEGDJE JE GREŠKA
+									echo "<li><a onclick=SendTo_$id(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
+   function SendTo_$id(){
+        window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+    }
+</script>";
 								}
 							}
 							else
 							{									
 								if ($zadnji_pisao!=$user)				
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></p></td>";	
+									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
 								else
-									echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></p></td>";
+									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
 							} 
 						}
 						else
-							echo "<td height=100 width=100><p align=center><a href=admin.php?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></p></td>";
+						//NI OVDJE NE RADI EHO OD ID-A
+							echo "$id<li><a onclick=SendTo(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
+   function SendTo(){
+       window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+    }
+</script>";
 								$brojim++;
 						}
 					}
@@ -399,7 +414,7 @@ while ($re = mysql_fetch_array($rez))
 			echo "</ul>";	
 ?>
 <SCRIPT LANGUAGE="JavaScript">
-$('.jsonic').editable('moduli/nastava/snimi_post_brzo.php?user=<?php echo $user; ?>', { 
+$('.jsonic').editable('snimi_post_brzo.php?user=<?php echo $user; ?>', { 
          submit    : 'OK',
 		 onblur   : 'submit',
          tooltip   : 'Unutar sat vremena od objave komentara imate pravo na izmjenu.',
@@ -412,7 +427,9 @@ $('.jsonic').editable('moduli/nastava/snimi_post_brzo.php?user=<?php echo $user;
 </script> 
          
 <?php
+
 	include("post.php");
+	
 	
 	
 	
