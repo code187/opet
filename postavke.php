@@ -22,7 +22,6 @@ $baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
-
 //Postavke uploada slike za vijesti
 $upload= "800";  //u kb
 $vrsta = "image/pjpeg"; //koji format slike
