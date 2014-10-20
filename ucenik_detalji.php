@@ -1,3 +1,28 @@
+<script>
+ $(document).ready(function() {
+	  function onSuccess()
+        {
+           location.reload();
+		}
+        $('#showmenu').click(function() {
+                $('.menu').slideToggle("fast");
+        });
+		$("#posaljime").click(function(){
+  
+                var formData = $("#nasaforma").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "post_snimanje_predmeti.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess
+                });
+  
+                return false;
+            });
+    });
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
   $('div.mjeseci> div').hide();
@@ -47,10 +72,9 @@ error_reporting(0);
 	$cita= $_POST['citao'];
 	$citao=str_replace("undefined"," ",$cita);
 //Baza i username i password
-$baza = "gaudeam_knex2013";
+$baza = "gaudeam_knex";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
-
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
@@ -59,8 +83,8 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = $idk")or die(mysql_error());
 $in=mysql_fetch_array($check);
  //Gives error if user dosen't exist
-include "postavke.php";
-include "funkcije.php";
+include "http://gaudeamus.hr/mobile/postavke.php";
+include "http://gaudeamus.hr/mobile/funkcije.php";
 $idk = $in['x']; 
 //echo $citao;
 if ($idk!="")
@@ -407,7 +431,7 @@ if ($idk!="")
 		?>
     
     </table>
-    <span class="podnaslovi"><h4>Bilje&scaron;ke</h4></span>
+    <span class="podnaslovi"><h2>Bilje&scaron;ke</h2></span>
     <table id="tablica_mjesci" cellpadding="0" cellspacing="0">
 
   <tr >
@@ -423,7 +447,7 @@ if ($idk!="")
 		echo "<h3 class=rub id=icon8>$mjes</h3>";
 		$boj_mj = $bris[$br_mj];
 		if ($biljeska[$boj_mj]=="")
-		$biljeska[$boj_mj] = "U ovom mjesecu trenutno nema bilje&scaron;ki.";
+		$biljeska[$boj_mj] = "<p>U ovom mjesecu trenutno nema bilje&scaron;ki.</p>";
 		//smajliji
 		$biljeska[$boj_mj] = preg_replace($patterns, $replacements, $biljeska[$boj_mj]);
 		echo "<div id=$boj_mj class=rub><table border=0 width=100% cellpadding=0 cellspacing=0 style=border:none;>$biljeska[$boj_mj]</table></div>";
@@ -436,7 +460,109 @@ if ($idk!="")
 </table>
 
 <?php
+$prava_kor = $in['prava'];
+	mysql_query('set names utf8');
+	$a = "select * from forum_postovi where prip = 'u-$idk-$pred' order by id desc";
+	//echo $a;
+echo "<ul id=postovi>";
+$rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice postova!</span>");
+
+while ($re = mysql_fetch_array($rez))
+				{	
+					$pt_id = $re["id"]; 
+					$red_idova[]=$re["id"];
+					$pt_tko = $re["tko"];
+					$post_at = $pt_tko;
+					$pt_opis = $re["opis"];
+					$pt_kada=$re["kada"];
+					$tko_sm=$re["tko_smije"];
+					$automatika = $re["automatika"];
+					$pt_kratki_datum=$re["moze"];
+					//nastavnik - color="#8ec6e9"
+					//ucenik - bgcolor=#F6F6F6
+					//nastavnik i roditelj - f2d4b4
+					if ($tko_sm=="2") //nastavnik
+					$bojko="bgcolor=#8ec6e9";
+					elseif ($tko_sm=="3") //nastavnik i roditelj
+					$bojko="bgcolor=#f2d4b4";
+					elseif ($tko_sm=="4") //ucenik
+					$bojko="bgcolor=#ebf6ad";
+					else
+					{
+						if ($bojko=="class=alt") {$bojko="";} else {$bojko="class=alt";}
+					}
+					echo "<tr ".$bojko.">";	
+					$pt_mozel = $pt_tko;
+					$pt_tko = puno_ime($pt_tko);
+					$slika_korisnika=slika_korisnika($pt_mozel);
+					if ($slika_korisnika!="")
+					{
+						$filename="doc/fotke/korisnici/$slika_korisnika";
+						if (file_exists($filename)) 
+							$slika = "doc/fotke/korisnici/$slika_korisnika";
+							else
+							$slika = "images/nepoznati_user.png";
+					}
+					$datumic = date("j.m.Y");
+					$danas=explode(" - ",$pt_kada);
+					if ($danas[0] == $datumic)
+					$pt_kada="Danas - $danas[1]";
+					if ($prava_kor=="3")
+					$ispis_ured = "<a href=admin.php?p=ucenik&m=nastava&ak=7&idic=$pt_id&idk=$idk&razred=$razred><img src='images/delete1.png' border=0 title=Obri&scaron;i alt=Obri&scaron;i></a>";
+					else 
+					{
+						//razrednik smije brisati auto komentare
+						$razrednik=razrednik($user);
+						if ($razrednik!="0" and $automatika!="0")
+						{
+							$ispis_ured = "<a href=admin.php?p=ucenik&m=nastava&ak=7&idic=$pt_id&idk=$idk&razred=$razred><img src='images/delete1.png' border=0 title=Obri&scaron;i alt=Obri&scaron;i></a>";
+						}
+						else
+						$ispis_ured ="";
+					}
+					$pt_opis=nl2br($pt_opis);
+					$nadi="||||";
+					$pos = strpos($pt_opis, $nadi);
+					if ($pos!==false)
+					{
+						$tklik = explode("||||",$pt_opis);
+						$ses = explode("&s=",$tklik[1]);
+						$to = explode("target=_blank",$ses[1]); // tu je sada sesija
+						$ns = session_id();
+						$tfinal = "$ses[0]&s=$ns target=_blank>Prilo&#382;eni dokument</a>";
+						$pt_opis = "$tklik[0]</div><div class=nista>$tfinal";
+					}
+					//ako nije prošlo 1h od objave posta - omoguci njegovo uredivanje
+					$sada_kratko = date("U");
+					$postovo_kratko = $pt_kratki_datum + 3600; //unutar sat vremena
+					if ($sada_kratko<$postovo_kratko and $user==$post_at)
+					$pt_opis="<div class=jsonic id='$pt_id'>$pt_opis</div>";
+					$pt_opis = str_replace("š","&scaron;",$pt_opis);
+					$pt_opis = str_replace("Š","&Scaron;",$pt_opis);
+					$pt_opis = str_replace("ž","&#382;",$pt_opis);
+					$pt_opis = str_replace("Ž","&#382;",$pt_opis);
+					$pt_tko = str_replace("š","&scaron;",$pt_tko);
+					$pt_tko = str_replace("Š","&Scaron;",$pt_tko);
+					$pt_tko = str_replace("ž","&#382;",$pt_tko);
+					$pt_tko = str_replace("Ž","&#382;",$pt_tko);
+					//dodaj donji border kada su drugacije ofarbani
+					
+					if ($tko_sm=="2" or $tko_sm=="3" or $tko_sm=="4") //nastavnik
+					echo "<td align=left valign=middle width=70% height=25 style='border-bottom:1px solid #b9b9b9;'>$pt_opis</td><td valign=top width=10% style='border-bottom:1px solid #b9b9b9;'>$pt_kada</td><td style='border-bottom:1px solid #b9b9b9;'><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
+					else
+					echo "<li id='$pt_id'><img src=$slika width=40 border=0>$pt_tko<br>$pt_kada</li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></li><script>
+ $(document).ready(function() {
+        $('#$pt_id').click(function() {
+                $('.$pt_id').slideToggle('fast');
+        });
+		//var mak=<?php echo $red_idova[0]; ?>;
+		//$('#'+mak+').show();
+    });
+</script>";
+				}
+			echo "</ul>";
 	//postovi korisnika
+	include "http://gaudeamus.hr/mobile/post_predmeti.php";
 						 }}
 		/*	}
 		else

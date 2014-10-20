@@ -1,5 +1,6 @@
 <?php
 $sazetak=mysql_real_escape_string($sazetak);
+$predmet=$pred;
 if ($predmet!="")
 {
 	$sesija_id = session_id();
@@ -55,10 +56,10 @@ if ($ak=="2")
 		//mlati li netko po refreshu?
 		//dvije minute ne može stisnuti refresh
 		//$compare = $compare + 300 ;
-		//echo "proba $nastavnik $predmet";
+		//echo "proba $nastavnik $predmet"; 
 		$zaprovjeru = $compare-3;
-		$a = "select * from forum_postovi where prip='u-$idk' and moze>=$zaprovjeru;";
-		//echo $a;
+		$a = "select * from forum_postovi where prip='u-$idk-$pred' and moze>=$zaprovjeru;";
+		echo $a;
 		$rezaa = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice kategorija foruma!</span>");
 		$imali = mysql_num_rows($rezaa);
 		if ($imali =="0")
@@ -95,7 +96,7 @@ if ($ak=="2")
 								}
 								if ($ukupno!="0")
 								{
-									$upit_snimi="insert into forum_postovi (opis,prip,tko,kada, moze, tko_smije) values ('$sazetak', 'u-$idk-$id','$user','$skupa','$compare','$dozvole');";
+									$upit_snimi="insert into forum_postovi (opis,prip,tko,kada, moze, tko_smije) values ('$sazetak', 'u-$idk-$id-$pred','$user','$skupa','$compare','$dozvole');";
 										$rs=mysql_query($upit_snimi) or die("<span class=podnaslovi_crveni>Greška prilikom upisa u bazu postova foruma!</span>");
 										$ock=1;
 								}
@@ -108,7 +109,7 @@ if ($ak=="2")
 						}
 
 					}
-					$upit_snimi="insert into forum_postovi (opis,prip,tko,kada, moze, tko_smije) values ('$sazetak', 'u-$idk','$user','$skupa','$compare','$dozvole');";
+					$upit_snimi="insert into forum_postovi (opis,prip,tko,kada, moze, tko_smije) values ('$sazetak', 'u-$idk-$pred','$user','$skupa','$compare','$dozvole');";
 					//echo $upit_snimi;
 					$rs=mysql_query($upit_snimi) or die("<span class=podnaslovi_crveni>Greška prilikom upisa u bazu postova foruma!</span>");
 					echo "<b>Komentar uspješno poslan!</b><br>";
@@ -124,11 +125,11 @@ $bojko = "";
 		//tko smije vidjeti naš komentar?
 		$item_per_page = 5; //broj postova po otkrivanju
 		if ($prava_postavke=="1") //ucenik
-	  $a = "select * from forum_postovi where prip = 'u-$idk' and (tko_smije='' or tko_smije='1' or tko_smije='4') order by id desc";
+	  $a = "select * from forum_postovi where prip = 'u-$idk-$pred' and (tko_smije='' or tko_smije='1' or tko_smije='4') order by id desc";
 	  elseif ($prava_postavke=="4") //roditelj
-	   $a = "select * from forum_postovi where prip = 'u-$idk' and (tko_smije='' or tko_smije='1' or tko_smije='3') order by id desc";
+	   $a = "select * from forum_postovi where prip = 'u-$idk-$pred' and (tko_smije='' or tko_smije='1' or tko_smije='3') order by id desc";
 	   else
-	   $a = "select * from forum_postovi where prip = 'u-$idk' order by id desc";
+	   $a = "select * from forum_postovi where prip = 'u-$idk-$pred' order by id desc";
 	  //echo $a;
 	  $rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice postova!</span>");
 	  //prebrojimo postove za load more
@@ -185,7 +186,7 @@ $(document).ready(function() {
     </table><br />
     <form  method="post" name="nasaforma" id="nasaforma" autocomplete="off" >
     
-    <table align=center cellpadding=1 cellspacing=0 border=0 ><tr><td align="center"> 
+    <table width=95%  align=center cellpadding=1 cellspacing=0 border=0 ><tr><td align="center"> 
 	<?php if ($prava_postavke=="2" or $prava_postavke=="3") { ?>  Komentar smiju vidjeti:&nbsp;<select name="dozvole" id="dozvole">
       <option value="1" style="background-color:<?php echo "#ffffff"; ?>;">Svi</option>
       <option value="2" style="background-color:<?php echo "#8ec6e9"; ?>;">Samo nastavnik</option>

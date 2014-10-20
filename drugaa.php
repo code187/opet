@@ -1,15 +1,34 @@
 <script>
  $(document).ready(function() {
+	  function onSuccess()
+        {
+           location.reload();
+		}
         $('#showmenu').click(function() {
                 $('.menu').slideToggle("fast");
         });
+		$("#posaljime").click(function(){
+  
+                var formData = $("#nasaforma").serialize();
+  
+                $.ajax({
+                    type: "POST",
+                    url: "http://gaudeamus.hr/mobile/post_snimanje.php",
+                    cache: false,
+                    data: formData,
+                    success: onSuccess
+                });
+  
+                return false;
+            });
     });
 </script>
+
 <?php
 error_reporting(0);
     $firstName = $_POST['x'];
 //Baza i username i password
-$baza = "gaudeam_knex2013";
+$baza = "gaudeam_knex";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
@@ -20,8 +39,8 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
-include_once "postavke.php";
-include "funkcije.php";	
+include_once "http://gaudeamus.hr/mobile/postavke.php";
+include "http://gaudeamus.hr/mobile/funkcije.php";	
 
 if ($idk!="")
 	{
@@ -96,19 +115,14 @@ if ($idk!="")
 				}
 			if ($prava_postavke=="1" or $prava_postavke=="4") //ako su ucenik ili roditelj neka vide konzultacije
 			/*echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";*/
-			echo "<ul id=ucenik><li><img src=$slika id='showmenu'/></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
+			echo "<div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
 				<ul>
-				<li><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10 onclick='SendToUrl(); return false;''>Osobni plan aktivnosti</a></li>
-				<li><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></li>
-				<li>Mjesto i država rođenja: $infon[3]</li>
-				<li>Državljanstvo: $infon[4]</li>
-				<li>Narodnost: $infon[5]</li>
-				<li>Ime i prezime majke: $infon[6]</li>
-				<li>Ime i prezime oca: $infon[7]</li>
+				<li><a style='margin-right:10px' href=# rel=icon10>Osobni plan aktivnosti</a></li>
+				<li><a style='margin-left:10px' href=# rel=icon3>Konzultacije</a></li>
 				</ul>
-			</div>";
+			</div></div><div style=clear:both></div>";
 			else
 			echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=napomena&m=nastava&idk=$idk rel=icon2>Napomena o u&#269;eniku</a><a href=admin.php?p=vise_ucenika&m=nastava&idk=$idk rel=icon2>Sve ocjene</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";
 			
@@ -282,7 +296,7 @@ if ($idk!="")
 									//OVDJE NEGDJE JE GREŠKA
 									echo "<li><a onclick=SendTo_$id(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
    function SendTo_$id(){
-        window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+        window.location=\"http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
     }
 </script>";
 								}
@@ -290,16 +304,16 @@ if ($idk!="")
 							else
 							{									
 								if ($zadnji_pisao!=$user)				
-									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
+									echo "<li><a href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id&citao=$id_pisma class=highlightit><img src=images/$slikapredmeta><br><font color=red>$puno_ime</a></font></li>";			
 								else
-									echo "<li><a href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
+									echo "<li><a href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id class=highlightit><img src=images/$slikapredmeta><br>$puno_ime</a></li>";
 							} 
 						}
 						else
 						//NI OVDJE NE RADI EHO OD ID-A
-							echo "$id<li><a onclick=SendTo(); href=treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
+							echo "$id<li><a onclick=SendTo(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
    function SendTo(){
-       window.location=\"treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
+       window.location=\"http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
     }
 </script>";
 								$brojim++;
@@ -323,6 +337,7 @@ $rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja 
 while ($re = mysql_fetch_array($rez))
 				{	
 					$pt_id = $re["id"]; 
+					$red_idova[]=$re["id"];
 					$pt_tko = $re["tko"];
 					$post_at = $pt_tko;
 					$pt_opis = $re["opis"];
@@ -402,16 +417,18 @@ while ($re = mysql_fetch_array($rez))
 					if ($tko_sm=="2" or $tko_sm=="3" or $tko_sm=="4") //nastavnik
 					echo "<td align=left valign=middle width=70% height=25 style='border-bottom:1px solid #b9b9b9;'>$pt_opis</td><td valign=top width=10% style='border-bottom:1px solid #b9b9b9;'>$pt_kada</td><td style='border-bottom:1px solid #b9b9b9;'><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
 					else
-					echo "<li id='$pt_id'><img src=$slika width=40 border=0>$pt_tko<br>$pt_kada</li><div style=clear:both></div><li class='$pt_id' style='display: none;'>$pt_opis</li><script>
+					echo "<li id='$pt_id'><span><img src=$slika width=40 border=0><p>$pt_tko<br>$pt_kada</p></li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></span></li><script>
  $(document).ready(function() {
         $('#$pt_id').click(function() {
                 $('.$pt_id').slideToggle('fast');
         });
+		//var mak=<?php echo $red_idova[0]; ?>;
+		//$('#'+mak+').show();
     });
 </script>";
 				}
 			echo "</ul>";
-		
+		include "http://gaudeamus.hr/mobile/post.php";
         
 }
 

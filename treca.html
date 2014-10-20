@@ -8,11 +8,6 @@
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
     
     <meta charset="utf-8">
-    <script language="javascript">
-   function nazad(){
-       window.location='http://gaudeamus.rh/mobile/druga.html'
-    }
-</script>
     <script>
     	function GetUrlValue(VarSearch){
     var SearchString = window.location.search.substring(1);
@@ -32,6 +27,16 @@
 //alert(GetUrlValue('citao'));
     </script>
     <script>
+	var tmp=document.URL;
+	
+	var n = tmp.length;
+	
+	var mm = n-10;
+	//alert(mm);
+	var final = tmp.substring(mm,n);
+	
+	//alert(final);
+	if (final!='treca.html'){
 	sessionStorage.setItem("p",GetUrlValue('p'));
 	var p =sessionStorage.getItem("p");
 	sessionStorage.setItem("m",GetUrlValue('m'));
@@ -42,19 +47,30 @@
 	var razred =sessionStorage.getItem("razred");
 	sessionStorage.setItem("pred",GetUrlValue('pred'));
 	var pred =sessionStorage.getItem("pred");
+	
+		sessionStorage.setItem("ak",GetUrlValue('ak'));
+	var ak =sessionStorage.getItem("ak");
+	sessionStorage.setItem("sazetak",GetUrlValue('sazetak'));
+	var sazetak =sessionStorage.getItem("sazetak");
 	sessionStorage.setItem("citao",GetUrlValue('citao'));
-	var citao =sessionStorage.getItem("citao");		
+	var citao =sessionStorage.getItem("citao");
+		}	
+	
+	 var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
 	$(document).ready(function(){
-    $.post("http://gaudeamus.hr/mobile/ucenik_detalji.php",
+    $.post("ucenik_detalji.php",
     {
+   		ak:ak,
 		p:p,
    		m:m,
 		idk:idk,
 		razred:razred,
 		pred:pred,
+		sazetak:sazetak,
 		citao:citao,
 		x:x
+		
 	 },
 	
     function(data,status){
@@ -66,7 +82,7 @@
 		console.log(data);
 		//alert(data.puno);
 		 
-        $("#naslov").text(data.pred);
+        $("#naslov").text(data.puno);
 		
     });
   });

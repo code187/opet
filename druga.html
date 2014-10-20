@@ -8,12 +8,64 @@
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
     
     <meta charset="utf-8">
-    <script>	
+    <script>
+    	function GetUrlValue(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] == VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+//alert(GetUrlValue('p'));
+//alert(GetUrlValue('m'));
+//alert(GetUrlValue('idk'));
+//alert(GetUrlValue('razred'));
+//alert(GetUrlValue('pred'));
+//alert(GetUrlValue('citao'));
+    </script>
+    <script>
+	var tmp=document.URL;
+	
+	var n = tmp.length;
+	
+	var mm = n-10;
+	//alert(mm);
+	var final = tmp.substring(mm,n);
+	
+	//alert(final);
+	if (final!='druga.html'){
+	sessionStorage.setItem("p",GetUrlValue('p'));
+	var p =sessionStorage.getItem("p");
+	sessionStorage.setItem("m",GetUrlValue('m'));
+	var m =sessionStorage.getItem("m");
+	sessionStorage.setItem("idk",GetUrlValue('idk'));
+	var idk =sessionStorage.getItem("idk");
+	sessionStorage.setItem("razred",GetUrlValue('razred'));
+	var razred =sessionStorage.getItem("razred");
+	sessionStorage.setItem("pred",GetUrlValue('pred'));
+	var pred =sessionStorage.getItem("pred");
+	
+		sessionStorage.setItem("ak",GetUrlValue('ak'));
+	var ak =sessionStorage.getItem("ak");
+	sessionStorage.setItem("sazetak",GetUrlValue('sazetak'));
+	var sazetak =sessionStorage.getItem("sazetak");	}	
+	 var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
 	$(document).ready(function(){
-    $.post("http://gaudeamus.hr/mobile/drugaa.php",
+    $.post("drugaa.php",
     {
-   		x:x
+   		ak:ak,
+		p:p,
+   		m:m,
+		idk:idk,
+		razred:razred,
+		pred:pred,
+		sazetak:sazetak,
+		x:x
+		
 	 },
 	
     function(data,status){
