@@ -25,7 +25,7 @@
 </script>
 
 <?php
-error_reporting(0);
+//error_reporting(0);
     $firstName = $_POST['x'];
 //Baza i username i password
 $baza = "gaudeam_knex2013";
@@ -39,8 +39,8 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
-include_once "http://gaudeamus.hr/mobile/postavke.php";
-include "http://gaudeamus.hr/mobile/funkcije.php";	
+include_once "postavke.php";
+include "funkcije.php";	
 
 if ($idk!="")
 	{
