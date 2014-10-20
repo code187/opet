@@ -13,7 +13,7 @@
   
                 $.ajax({
                     type: "POST",
-                    url: "post_snimanje_predmeti.php",
+                    url: "http://gaudeamus.hr/mobile/post_snimanje_predmeti.php",
                     cache: false,
                     data: formData,
                     success: onSuccess
@@ -83,8 +83,8 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = $idk")or die(mysql_error());
 $in=mysql_fetch_array($check);
  //Gives error if user dosen't exist
-include "http://gaudeamus.hr/mobile/postavke.php";
-include "http://gaudeamus.hr/mobile/funkcije.php";
+include "postavke.php";
+include "funkcije.php";
 $idk = $in['x']; 
 //echo $citao;
 if ($idk!="")
@@ -562,7 +562,7 @@ while ($re = mysql_fetch_array($rez))
 				}
 			echo "</ul>";
 	//postovi korisnika
-	include "http://gaudeamus.hr/mobile/post_predmeti.php";
+	include "post_predmeti.php";
 						 }}
 		/*	}
 		else

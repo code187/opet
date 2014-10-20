@@ -428,7 +428,7 @@ while ($re = mysql_fetch_array($rez))
 </script>";
 				}
 			echo "</ul>";
-		include "http://gaudeamus.hr/mobile/post.php";
+		include "post.php";
         
 }
 
