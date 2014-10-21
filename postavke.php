@@ -106,7 +106,7 @@ while ($repa = mysql_fetch_array($rezultat))
 //Provjera sesije ako nije odmah prekini!
 if ($user=="")
 	{
-		echo "Neovlašteni pristup ili istekla sesija! Molimo prijavite se na sustav pomo&#263;u forme!<br><br><a href=index.php>Ponovna prijava</a>";
+		echo "Neovlašteni pristup ili istekla sesija! Molimo prijavite se na sustav pomo&#263;u forme!<br><br><a href=index.html>Ponovna prijava</a>";
 		unset($user);
 		//$istek = date(U)+"300"; //5min kazne da se ne loguješ
 		$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '$brojickorisnika'";
