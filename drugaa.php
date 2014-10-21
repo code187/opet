@@ -428,5 +428,5 @@ while ($re = mysql_fetch_array($rez))
 		include "post.php";
         
 }
-
+mysql_close($spoj);
 ?>

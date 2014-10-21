@@ -576,4 +576,5 @@ while ($re = mysql_fetch_array($rez))
 	}
 	else
 	echo "<b>GREŠKA u sustavu ili ne ovlašteni ulaz!</b>";*/
+mysql_close($spoj);
 ?>
