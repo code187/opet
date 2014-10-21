@@ -1,6 +1,6 @@
 <script language="javascript">
-   function SendToUrl(){
-       window.location='druga.html'
+   function nazad(){
+       window.location='http://gaudeamus.hr/mobile/druga.html'
     }
 </script>
 <script>
