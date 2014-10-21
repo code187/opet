@@ -3,7 +3,6 @@ error_reporting(0);
 include_once "postavke_read.php";
 include "funkcije.php";
 $sazetak=$_POST['sazetak'];
-echo "lccaca $sazetak";
 //$sazetak=mysql_real_escape_string($sazetak);
 //echo "baaaa!";
 //snimi post
@@ -20,7 +19,7 @@ if ($ak=="2")
 		$rezaa = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice kategorija foruma!</span>");
 		$imalie = mysql_num_rows($rezaa);
 		if ($imalie=="0")
-		{ echo "lalall $sazetak";
+		{ 
 			if ($sazetak!="")
 				{
 					//datum

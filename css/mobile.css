@@ -26,6 +26,7 @@
 #callAjaxPage > div.ui-bar-a.ui-footer {
 	position: absolute;
 	bottom: 0px;
+	text-align: center;
 }
 #callAjaxPage > div.ui-bar-a.ui-footer a{
 	color: #FFF;
@@ -37,6 +38,7 @@
 #drugastranica > div.ui-bar-a.ui-footer{
 	bottom: 0px;
 	margin-top: 50px;
+	text-align: center;
 }
 #drugastranica > div.ui-bar-a.ui-footer a{
 	color: #FFF;
@@ -121,6 +123,8 @@
 	margin-right: auto;
 	margin-left: auto;
 	width: 250px;
+	margin-top: 12px;
+	margin-bottom: 13px;
 }
 #postovi ul li span {
 	margin-right: auto;
@@ -164,6 +168,11 @@
 	margin-right: auto;
 	margin-left: auto;
 }
+#tablica_lijevoc2 td{
+	border: 1px solid #CCC;
+	margin: 0px;
+	padding: 0px;
+}
 #tablica_mjesci {
 	margin: 0px;
 	padding: 0px;
@@ -186,4 +195,23 @@
 }
 .mjeseci {
 	
+}
+#drugastranica > div.ui-bar-a.ui-footer > p {
+	color: #FFF;
+}
+#callAjaxForm {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	text-align: center;
+}
+#firstName {
+	margin-bottom: 10px;	
+}
+#sazetak {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;	
 }

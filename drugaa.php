@@ -13,7 +13,7 @@
   
                 $.ajax({
                     type: "POST",
-                    url: "http://gaudeamus.hr/mobile/post_snimanje.php",
+                    url: "post_snimanje.php",
                     cache: false,
                     data: formData,
                     success: onSuccess
@@ -25,12 +25,12 @@
 </script>
 
 <?php
-//error_reporting(0);
+error_reporting(0);
     $firstName = $_POST['x'];
 //Baza i username i password
-$baza = "gaudeam_knex2013";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
@@ -118,10 +118,7 @@ if ($idk!="")
 			echo "<div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
-				<ul>
-				<li><a style='margin-right:10px' href=# rel=icon10>Osobni plan aktivnosti</a></li>
-				<li><a style='margin-left:10px' href=# rel=icon3>Konzultacije</a></li>
-				</ul>
+				
 			</div></div><div style=clear:both></div>";
 			else
 			echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=napomena&m=nastava&idk=$idk rel=icon2>Napomena o u&#269;eniku</a><a href=admin.php?p=vise_ucenika&m=nastava&idk=$idk rel=icon2>Sve ocjene</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";

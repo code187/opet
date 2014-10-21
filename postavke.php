@@ -18,9 +18,9 @@ foreach( $_GET as $key => $value ) {
 $user = $_POST['x'];
 
 //Baza i username i password
-$baza = "gaudeam_knex2013";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 
 //Postavke uploada slike za vijesti
 $upload= "800";  //u kb

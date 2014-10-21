@@ -140,14 +140,14 @@ $bojko = "";
 $(document).ready(function() {
     var track_click = 0; //track user click on "load more" button, righ now it is 0 click
     var total_pages = <?php echo $total_pages; ?>;	
-	$('.results').load("moduli/nastava/dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>", {'page':track_click}, function() {track_click++;});
+	$('.results').load("dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>", {'page':track_click}, function() {track_click++;});
     $(".load_more").click(function (e) { //user clicks on button
         $(this).hide(); //hide load more button on click
         $('.animation_image').show(); //show loading image
         if(track_click <= total_pages) //user click number is still less than total pages
         {
             //post page number and load returned data into result element
-            $.post('moduli/nastava/dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>',{'page': track_click}, function(data) {
+            $.post('dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>',{'page': track_click}, function(data) {
            
                 $(".load_more").show(); //bring back load more button
                

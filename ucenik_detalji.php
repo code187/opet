@@ -1,3 +1,8 @@
+<script language="javascript">
+   function SendToUrl(){
+       window.location='mobile/druga.html'
+    }
+</script>
 <script>
  $(document).ready(function() {
 	  function onSuccess()
@@ -13,7 +18,7 @@
   
                 $.ajax({
                     type: "POST",
-                    url: "http://gaudeamus.hr/mobile/post_snimanje_predmeti.php",
+                    url: "post_snimanje_predmeti.php",
                     cache: false,
                     data: formData,
                     success: onSuccess
@@ -70,11 +75,11 @@ error_reporting(0);
 	$pred= $_POST['pred'];
 	$razred= $_POST['razred'];
 	$cita= $_POST['citao'];
-	$citao=str_replace("undefined"," ",$cita);
+	$citao=str_replace("","undefined",$cita);
 //Baza i username i password
-$baza = "gaudeam_knex2013";
-$korisnik = "gaudeam_knex";
-$lozinka = "@00886726@";
+$baza = "gaudeam_web";
+$korisnik = "loop";
+$lozinka = "code187";
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
@@ -86,7 +91,8 @@ $in=mysql_fetch_array($check);
 include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
-//echo $citao;
+echo $citao;
+
 if ($idk!="")
 	{
 		$razred=razred($idk);
@@ -102,7 +108,7 @@ if ($idk!="")
 					$rezu_mentor = mysql_query($jeli_mentor) or die("<span class=podnaslovi_crveni>Greška prilikom upita ovlasti mentora!</span>");
 					$cu_mentor = mysql_num_rows($rezu_mentor); 
 					if ($cu_mentor!="0")
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http:gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
 					else					
 					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
 				}
@@ -146,7 +152,7 @@ if ($idk!="")
 					{
 						if ($jeliprofesor==$user)
 						{*/
-							if ($citao!="undefined")
+							if ($citao!="")
 							{
 								$a="select id from forum_postovi where id=$citao and pogledao like '%$user%';";
 								echo $a;
@@ -357,7 +363,7 @@ if ($idk!="")
 						?>
 <table id="tablica_lijevoc2">
       <tr class="alt">
-        <td width="34%" align="center" >&nbsp;</td>
+        <td width="34%" align="center">&nbsp;</td>
         <td width="6%" align="center"><p align="center">9.</p></td>
         <td width="6%"  align="center"><p align="center">10.</p></td>
         <td width="6%" align="center"><p align="center">11.</p></td>
@@ -439,7 +445,7 @@ if ($idk!="")
 <div class="mjeseci">
 	<?php 
 	mysql_query('set names utf8');
-	$bris_mj = array("kolovoz","rujan","listopad","studeni","prosinac","sije&#269;anj", "velja&#269;a","ožujak","travanj","svibanj","lipanj","srpanj");
+	$bris_mj = array("kolovoz","rujan","listopad","studeni","prosinac","sije&#269;anj", "velja&#269;a","o&#382;ujak","travanj","svibanj","lipanj","srpanj");
 	$bris = array(8,9,10,11,12,1,2,3,4,5,6,7);
     //$br_mj=0;
 	foreach ($bris_mj as $mjes)
@@ -550,7 +556,7 @@ while ($re = mysql_fetch_array($rez))
 					if ($tko_sm=="2" or $tko_sm=="3" or $tko_sm=="4") //nastavnik
 					echo "<td align=left valign=middle width=70% height=25 style='border-bottom:1px solid #b9b9b9;'>$pt_opis</td><td valign=top width=10% style='border-bottom:1px solid #b9b9b9;'>$pt_kada</td><td style='border-bottom:1px solid #b9b9b9;'><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
 					else
-					echo "<li id='$pt_id'><img src=$slika width=40 border=0>$pt_tko<br>$pt_kada</li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></li><script>
+					echo "<li class='ppredmet' id='$pt_id'><img src=$slika width=40 border=0>$pt_tko<br>$pt_kada</li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></li><script>
  $(document).ready(function() {
         $('#$pt_id').click(function() {
                 $('.$pt_id').slideToggle('fast');

@@ -35,7 +35,7 @@
 	//alert(mm);
 	var final = tmp.substring(mm,n);
 	
-	alert(final);
+	//alert(final);
 	if (final!='druga.html'){
 	sessionStorage.setItem("p",GetUrlValue('p'));
 	var p =sessionStorage.getItem("p");
@@ -55,7 +55,7 @@
 	 var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
 	$(document).ready(function(){
-    $.post("http://gaudeamus.hr/mobile/drugaa.php",
+    $.post("drugaa.php",
     {
    		ak:ak,
 		p:p,
@@ -99,13 +99,8 @@
         </div>
   
         <div data-role="footer">
-        <a href="#" onclick="SendToUrl(); return false;"">Nazad</a>
-        <script language="javascript">
-   function SendToUrl(){
-       window.location='index.html'
-    }
-</script>
-            <h1>&reg; <a href="http://ofir.hr/">Ofir</a></h1>
+        
+            <p>&reg; Sva prava pridržana <a href="http://ofir.hr/">Ofir d.o.o</a></p>
         </div>
     </div>
 </body>
