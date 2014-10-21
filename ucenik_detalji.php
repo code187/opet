@@ -74,8 +74,8 @@ error_reporting(0);
     $firstName = $_POST['x'];
 	$pred= $_POST['pred'];
 	$razred= $_POST['razred'];
-	$cita= $_POST['citao'];
-	$citao=str_replace("","undefined",$cita);
+	$citao= $_POST['citao'];
+	//$citao=str_replace('undefined','nula',$cita);
 //Baza i username i password
 $baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";

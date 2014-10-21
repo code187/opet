@@ -25,6 +25,12 @@
 //alert(GetUrlValue('razred'));
 //alert(GetUrlValue('pred'));
 //alert(GetUrlValue('citao'));
+var citao=GetUrlValue('citao');
+alert (citao);
+if (citao = 'undefined'){
+	sessionStorage.setItem("citao",'');
+	var citao =sessionStorage.getItem("citao");
+	}
     </script>
     <script>
 	var tmp=document.URL;
@@ -52,8 +58,8 @@
 	var ak =sessionStorage.getItem("ak");
 	sessionStorage.setItem("sazetak",GetUrlValue('sazetak'));
 	var sazetak =sessionStorage.getItem("sazetak");
-	sessionStorage.setItem("citao",GetUrlValue('citao'));
-	var citao =sessionStorage.getItem("citao");
+	//sessionStorage.setItem("citao",GetUrlValue('citao'));
+	//var citao =sessionStorage.getItem("citao");
 		}	
 	
 	 var x =sessionStorage.getItem("x");	
