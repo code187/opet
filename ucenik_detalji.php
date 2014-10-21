@@ -110,7 +110,7 @@ if ($idk!="")
 					if ($cu_mentor!="0")
 					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http:gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
 					else					
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http://gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
 				}
 				else
 				{
