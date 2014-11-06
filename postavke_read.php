@@ -10,7 +10,6 @@ foreach( $_GET as $key => $value ) {
 $baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
-
 //lokalno
 /*
 $baza = "knex08";

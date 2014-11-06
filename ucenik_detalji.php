@@ -444,7 +444,7 @@ if ($idk!="")
     <td><!-- ispisati sve mjesece i otvoriti tekuci ostali su ispod zatvoreni poredani od rujna do lipnja -->
 <div class="mjeseci">
 	<?php 
-	mysql_query('set names utf8');
+	
 	$bris_mj = array("kolovoz","rujan","listopad","studeni","prosinac","sije&#269;anj", "velja&#269;a","o&#382;ujak","travanj","svibanj","lipanj","srpanj");
 	$bris = array(8,9,10,11,12,1,2,3,4,5,6,7);
     //$br_mj=0;
@@ -455,6 +455,10 @@ if ($idk!="")
 		if ($biljeska[$boj_mj]=="")
 		$biljeska[$boj_mj] = "<p>U ovom mjesecu trenutno nema bilje&scaron;ki.</p>";
 		//smajliji
+		$biljeska[$boj_mj]=str_replace("š","&scaron;",$biljeska[$boj_mj]);
+		$biljeska[$boj_mj]=str_replace("Š","&Scaron;",$biljeska[$boj_mj]);
+		$biljeska[$boj_mj] = str_replace("ž","&#382;",$biljeska[$boj_mj]);
+		$biljeska[$boj_mj] = str_replace("Ž","&#382;",$biljeska[$boj_mj]);
 		$biljeska[$boj_mj] = preg_replace($patterns, $replacements, $biljeska[$boj_mj]);
 		echo "<div id=$boj_mj class=rub><table border=0 width=100% cellpadding=0 cellspacing=0 style=border:none;>$biljeska[$boj_mj]</table></div>";
 		$br_mj++;
@@ -467,7 +471,7 @@ if ($idk!="")
 
 <?php
 $prava_kor = $in['prava'];
-	mysql_query('set names utf8');
+	
 	$a = "select * from forum_postovi where prip = 'u-$idk-$pred' order by id desc";
 	//echo $a;
 echo "<ul id=postovi>";

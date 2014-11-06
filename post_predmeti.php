@@ -59,7 +59,7 @@ if ($ak=="2")
 		//echo "proba $nastavnik $predmet"; 
 		$zaprovjeru = $compare-3;
 		$a = "select * from forum_postovi where prip='u-$idk-$pred' and moze>=$zaprovjeru;";
-		echo $a;
+		//echo $a;
 		$rezaa = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice kategorija foruma!</span>");
 		$imali = mysql_num_rows($rezaa);
 		if ($imali =="0")
@@ -120,7 +120,7 @@ if ($ak=="2")
 		echo "<b>Ne dozvoljeno ponavljanje postanja!</b><br>";
 	}
 //standardni ispis
-$poredba = date(U);
+$poredba = date('U');
 $bojko = "";
 		//tko smije vidjeti naš komentar?
 		$item_per_page = 5; //broj postova po otkrivanju
@@ -141,14 +141,14 @@ $bojko = "";
 $(document).ready(function() {
     var track_click = 0; //track user click on "load more" button, righ now it is 0 click
     var total_pages = <?php echo $total_pages; ?>;	
-	$('.results').load("moduli/nastava/dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>", {'page':track_click}, function() {track_click++;});
+	$('.results').load("dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>", {'page':track_click}, function() {track_click++;});
     $(".load_more").click(function (e) { //user clicks on button
         $(this).hide(); //hide load more button on click
         $('.animation_image').show(); //show loading image
         if(track_click <= total_pages) //user click number is still less than total pages
         {
             //post page number and load returned data into result element
-            $.post('moduli/nastava/dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>',{'page': track_click}, function(data) {
+            $.post('dohvati_postove.php?user=<?php echo $user; ?>&idk=<?php echo $idk; ?>',{'page': track_click}, function(data) {
            
                 $(".load_more").show(); //bring back load more button
                

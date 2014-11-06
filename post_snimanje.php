@@ -1,8 +1,9 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 include_once "postavke_read.php";
 include "funkcije.php";
 $sazetak=$_POST['sazetak'];
+$pred=$_POST['pred'];
 //$sazetak=mysql_real_escape_string($sazetak);
 //echo "baaaa!";
 //snimi post

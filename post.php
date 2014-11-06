@@ -1,5 +1,6 @@
 <?php
-$sazetak=mysql_real_escape_string($sazetak);
+
+
 if ($predmet!="")
 {
 	$sesija_id = session_id();
@@ -119,7 +120,7 @@ if ($ak=="2")
 		echo "<b>Ne dozvoljeno ponavljanje postanja!</b><br>";
 	}
 //standardni ispis
-$poredba = date(U);
+$poredba = date('U');
 $bojko = "";
 		//tko smije vidjeti naš komentar?
 		$item_per_page = 5; //broj postova po otkrivanju

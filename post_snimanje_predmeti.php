@@ -1,10 +1,9 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 include_once "postavke_read.php";
 include "funkcije.php";
 $sazetak=$_POST['sazetak'];
 $pred=$_POST['pred'];
-echo "lccaca $pred";
 //$sazetak=mysql_real_escape_string($sazetak);
 //echo "baaaa!";
 //snimi post
@@ -17,11 +16,11 @@ if ($ak=="2")
 		//echo "proba $nastavnik $predmet";
 		$zaprovjeru = $compare-3;
 		$a = "select * from forum_postovi where prip='u-$idk-predmet' and moze>=$zaprovjeru;";
-		echo $a;
+		//echo $a;
 		$rezaa = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice kategorija foruma!</span>");
 		$imalie = mysql_num_rows($rezaa);
 		if ($imalie=="0")
-		{ echo "lalall $sazetak";
+		{ 
 			if ($sazetak!="")
 				{
 					//datum
@@ -55,7 +54,6 @@ if ($ak=="2")
 								if ($ukupno!="0")
 								{
 									$upit_snimi="insert into forum_postovi (opis,prip,tko,kada, moze, tko_smije) values ('$sazetak', 'u-$idk-$predmet','$user','$skupa','$compare','$dozvole');";
-									echo $upit_snimi;
 										$rs=mysql_query($upit_snimi) or die("<span class=podnaslovi_crveni>Greška prilikom upisa u bazu postova foruma!</span>");
 										$ock=1;
 								}

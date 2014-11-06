@@ -39,15 +39,27 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
+$prava_postavke =$in['prava'];
+//$razred = $in['status'];
+//echo $razred;
 include_once "postavke.php";
 include "funkcije.php";	
-
+$bt= $in['vjezbe'];
+//echo $bt;
+/*if ($bt!="")
+	{
+		$opop = mysql_query("select * from korisnici where x = $bt");
+		//echo $opop;
+		$mi = mysql_fetch_array($opop);
+		$razred= $mi['status'];
+		echo $razred;
+	}*/
 if ($idk!="")
 	{
 		$razred=razred($idk);
 		//znaci da je korisnik u bazi, no provjeri je li to ucenik?
 		$pr = prava_korisnik_id($idk);
-		if ($pr=="1") //e sad je to ucenik
+		if ($pr=="1" or $pr=="4") //e sad je to ucenik
 			{	
 				if ($prava_postavke=="1" or $prava_postavke=="4")
 				echo "";
@@ -113,9 +125,10 @@ if ($idk!="")
 						else
 						$slika = "images/nepoznati_user.png";
 				}
+				
 			if ($prava_postavke=="1" or $prava_postavke=="4") //ako su ucenik ili roditelj neka vide konzultacije
 			/*echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";*/
-			echo "<div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Učenik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
+			echo "<div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
 				
@@ -125,10 +138,17 @@ if ($idk!="")
 			
 				echo "<ul id=predmeti>";
 				//pronadi sve dostupne predmete razreda i ispiši ih, a na klik se otvaraju detalji o svakom predmetu
+				if ($prava_postavke=="4")
+				{
+					$tmp_raz=ucenik_rod($idk);
+					$razred=razred($tmp_raz);
+					$idk=$tmp_raz;
+				}
 				$a="SELECT ime,id,replace(replace(replace(replace(replace(ime,'&#268;','Cxx'),'&Scaron;','Sx'),'&#381;','Zx'),'&#272;','Dx'),'&#262;','Cx') sortiraj FROM conf_predmeta where asst='$razred' ORDER BY sortiraj ASC";	
 				//echo $a;
 				$rez = mysql_query($a) or die("<span class=podnaslovi_crveni>Greška prilikom upita u predmeta!</span>");
 				$c = mysql_num_rows($rez);
+				
 				if ($c=="0")
 					echo "Trenutno nema predmeta za $razred!";
 				else
@@ -324,11 +344,12 @@ if ($idk!="")
 	echo "<div style=clear:both></div>";
 	
 	$prava_kor = $in['prava'];
-	mysql_query('set names utf8');
+	
 	$a = "select * from forum_postovi where prip = 'u-$idk' order by id desc";
 //echo $a;
 
 echo "<ul id=postovi>";
+//mysql_query("SET NAMES 'utf8'");ako stavimo ovdje onda stari postovi rade dobro a mob ne, bez ovoga mob radi dobro a stari ne prikazuju š i ž znakove
 $rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice postova!</span>");
 
 while ($re = mysql_fetch_array($rez))
