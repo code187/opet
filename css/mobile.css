@@ -8,6 +8,21 @@
 	border-left-style: none;
 	padding:0;
 }
+.logout {
+	float: right;
+	margin-right: 15px;
+}
+.logout2 {
+	float: right;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 15px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+.nazad {
+	margin-left: 15px;
+}
 .ui-body-c {
 	background-color: #f1e7dc;
 	background-image:none;

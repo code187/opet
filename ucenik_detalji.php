@@ -1,4 +1,10 @@
 <script language="javascript">
+   function gori(){
+       window.location=tmp
+    }
+</script>
+
+<script language="javascript">
    function nazad(){
        window.location='http://gaudeamus.hr/mobile/druga.html'
     }
@@ -92,7 +98,7 @@ include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
 echo $citao;
-
+echo "<a href='http://gaudeamus.hr/mobile/index.html'><img class='logout2' src='images/top1.png'></a>";
 if ($idk!="")
 	{
 		$razred=razred($idk);
@@ -108,9 +114,9 @@ if ($idk!="")
 					$rezu_mentor = mysql_query($jeli_mentor) or die("<span class=podnaslovi_crveni>Greška prilikom upita ovlasti mentora!</span>");
 					$cu_mentor = mysql_num_rows($rezu_mentor); 
 					if ($cu_mentor!="0")
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http:gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http:gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak></a></span>";
 					else					
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http://gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=http://gaudeamus.hr/mobile/druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak></a></span>";
 				}
 				else
 				{
@@ -580,5 +586,6 @@ while ($re = mysql_fetch_array($rez))
 	}
 	else
 	echo "<b>GREŠKA u sustavu ili ne ovlašteni ulaz!</b>";*/
+	echo '<a onClick="gori()"; id="gori" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
 mysql_close($spoj);
 ?>

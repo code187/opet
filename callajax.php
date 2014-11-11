@@ -7,10 +7,9 @@ $baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
+$spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
-$spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
-
-$baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
+$baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA - Baza nije pronadena na serveru!</span>");
 
 
 $check = mysql_query("SELECT * FROM korisnici WHERE korisnik = '".$_POST['firstName']."'")or die(mysql_error());
@@ -21,7 +20,7 @@ $check = mysql_query("SELECT * FROM korisnici WHERE korisnik = '".$_POST['firstN
 
  if ($check2 == 0) {
 
- 		echo 'That user does not exist in our database. Please try again';
+ 		echo 'GREŠKA - Vaše korisnicko ime ili lozinka su neispravni!';
 
  				}
 
@@ -41,13 +40,12 @@ $check = mysql_query("SELECT * FROM korisnici WHERE korisnik = '".$_POST['firstN
 
  	if ($_POST['lastName'] != $info['lozinka']) {
 
- 		die('Incorrect password, please try again.');
+ 		die('GREŠKA - Vaše korisnicko ime ili lozinka su neispravni!');
 
  	}
 	else 
 
  { 
- 
 echo ($info['x']);
 
 

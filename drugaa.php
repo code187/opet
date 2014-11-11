@@ -1,3 +1,8 @@
+<script language="javascript">
+   function gor(){
+       window.location='http://gaudeamus.hr/mobile/druga.html'
+    }
+</script>
 <script>
  $(document).ready(function() {
 	  function onSuccess()
@@ -130,7 +135,7 @@ if ($idk!="")
 				
 			if ($prava_postavke=="1" or $prava_postavke=="4") //ako su ucenik ili roditelj neka vide konzultacije
 			/*echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";*/
-			echo "<div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
+			echo "<a href='http://gaudeamus.hr/mobile/index.html'><img class='logout' src='images/top1.png'></a><div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
 				
@@ -451,5 +456,6 @@ while ($re = mysql_fetch_array($rez))
 		include "post.php";
         
 }
+echo '<a onClick="gor()"; id="gore" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
 mysql_close($spoj);
 ?>
