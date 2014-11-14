@@ -1,6 +1,6 @@
 <script language="javascript">
    function gor(){
-       window.location='http://gaudeamus.hr/mobile/druga.html'
+       window.scrollTo(0, 0);
     }
 </script>
 <script>
@@ -38,6 +38,8 @@ $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
 
+
+
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
@@ -52,6 +54,9 @@ $prava_postavke =$in['prava'];
 include_once "postavke.php";
 include "funkcije.php";	
 $bt= $in['vjezbe'];
+
+
+
 //echo $bt;
 /*if ($bt!="")
 	{
@@ -135,7 +140,7 @@ if ($idk!="")
 				
 			if ($prava_postavke=="1" or $prava_postavke=="4") //ako su ucenik ili roditelj neka vide konzultacije
 			/*echo "<table id=tablica_lijevoc><tr class=alt><td width=45><img src=$slika border=0 align=left></td><td>Prezime i ime: $punom<br>Dan, mjesec i godina ro&#273;enja: $infon[2]<br>Adresa: $adresa_korisnika<br>Telefon: $infon[0]<br><a href=admin.php?p=kal&m=opa&idk=$idk&razred=$razred rel=icon10>Osobni plan aktivnosti</a><br><a href=admin.php?p=konzultacije&m=nastava rel=icon3>Konzultacije</a></td><td>Mjesto i dr&#382;ava ro&#273;enja: $infon[3]<br>Dr&#382;avljanstvo: $infon[4]<br>Narodnost: $infon[5]<br>Ime i prezime majke: $infon[6]<br>Ime i prezime oca: $infon[7]</td> </tr></table>";*/
-			echo "<a href='http://gaudeamus.hr/mobile/index.html'><img class='logout' src='images/top1.png'></a><div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
+			echo "<a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'><img class='logout' src='images/top1.png'></a><div id='showmenu'><ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li>
 			</ul>
 			<div class='menu' style='display: none;'>
 				
@@ -459,3 +464,28 @@ while ($re = mysql_fetch_array($rez))
 echo '<a onClick="gor()"; id="gore" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
 mysql_close($spoj);
 ?>
+ <script>
+ function logout() {
+ var x =sessionStorage.getItem("x");	
+	 var x =sessionStorage.getItem("x");
+	
+    $.post("logout.php",
+    {
+   	
+		x:x
+		
+	 },
+    function(data,status){
+		var x=document.getElementById("naslov");
+      	//alert(data);
+		//alert;
+		$("#tijelo").html(data);
+		//data = jQuery.parseJSON(data);
+		console.log(data);
+		//alert(data.puno);
+		 
+        $("#naslov").text(data.puno);
+		
+    });
+ }
+</script>

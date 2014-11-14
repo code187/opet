@@ -40,14 +40,13 @@ $check = mysql_query("SELECT * FROM korisnici WHERE korisnik = '".$_POST['firstN
 
  	if ($_POST['lastName'] != $info['lozinka']) {
 
- 		die('GREŠKA - Vaše korisnicko ime ili lozinka su neispravni!');
-
+ 		die('Incorrect password, please try again.');
  	}
 	else 
 
  { 
-echo ($info['x']);
-
+echo $info['x'];
+session_start();
 
  } 
 
