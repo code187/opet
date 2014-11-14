@@ -73,7 +73,8 @@ $(document).ready(function() {
     });
 </script>
 <?php
-error_reporting(0);
+ if ($sesija==0){
+//error_reporting(0);
 	$p=$_POST['p'];
 	$m=$_POST['m'];
 	$idk= $_POST['idk'];
@@ -91,15 +92,20 @@ $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=p
 
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
 
-
 $check = mysql_query("SELECT * FROM korisnici WHERE x = $idk")or die(mysql_error());
 $in=mysql_fetch_array($check);
  //Gives error if user dosen't exist
 include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
+
+$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '".$_POST['x']."'";
+						
+						$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
+						echo " ";
+
 echo $citao;
-echo "<a href='http://gaudeamus.hr/mobile/index.html'><img class='logout2' src='images/top1.png'></a>";
+echo "<a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'><img class='logout' src='images/top1.png'></a>";
 if ($idk!="")
 	{
 		$razred=razred($idk);
@@ -588,5 +594,36 @@ while ($re = mysql_fetch_array($rez))
 	else
 	echo "<b>GREŠKA u sustavu ili ne ovlašteni ulaz!</b>";*/
 	echo '<a onClick="gori()"; id="gori" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
+	}
+else{
+echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a>";	
+}
 mysql_close($spoj);
+
 ?>
+<script>
+ function logout() {
+ var x =sessionStorage.getItem("x");	
+	 var x =sessionStorage.getItem("x");
+	
+    $.post("logout.php",
+    {
+   	
+		x:x
+		
+	 },
+    function(data,status){
+		var x=document.getElementById("naslov");
+      	//alert(data);
+		//alert;
+		$("#tijelo").html(data);
+		//data = jQuery.parseJSON(data);
+		console.log(data);
+		//alert(data.puno);
+		 
+        $("#naslov").text(data.puno);
+		
+    });
+ }
+
+</script>

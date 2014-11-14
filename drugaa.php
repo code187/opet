@@ -30,7 +30,8 @@
 </script>
 
 <?php
-error_reporting(0);
+ 
+//error_reporting(0);
     $firstName = $_POST['x'];
 //Baza i username i password
 $baza = "gaudeam_knex2013";
@@ -49,6 +50,10 @@ $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or di
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
 $prava_postavke =$in['prava'];
+$sesija=$in['sesija'];
+
+if ($sesija==0){
+	
 //$razred = $in['status'];
 //echo $razred;
 include_once "postavke.php";
@@ -462,7 +467,13 @@ while ($re = mysql_fetch_array($rez))
         
 }
 echo '<a onClick="gor()"; id="gore" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
+}
+else{
+echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a>";	
+}
 mysql_close($spoj);
+
+
 ?>
  <script>
  function logout() {
@@ -488,4 +499,5 @@ mysql_close($spoj);
 		
     });
  }
+
 </script>

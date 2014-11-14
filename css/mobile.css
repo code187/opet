@@ -230,3 +230,6 @@
 	margin-right: auto;
 	margin-left: auto;	
 }
+#gore > img {
+	margin-right:20px;
+}
