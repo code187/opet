@@ -1,3 +1,9 @@
+<?php 
+	session_start();
+	error_reporting(0);
+	$value = $_SESSION['varname'];
+	if ($value=="/mobile/druga.html"){
+?>
 <script language="javascript">
    function gori(){
        window.scrollTo(0, 0);
@@ -73,8 +79,8 @@ $(document).ready(function() {
     });
 </script>
 <?php
- if ($sesija==0){
-//error_reporting(0);
+ //if ($sesija==0){
+
 	$p=$_POST['p'];
 	$m=$_POST['m'];
 	$idk= $_POST['idk'];
@@ -83,8 +89,9 @@ $(document).ready(function() {
 	$razred= $_POST['razred'];
 	$citao= $_POST['citao'];
 	//$citao=str_replace('undefined','nula',$cita);
+	
 //Baza i username i password
-$baza = "gaudeam_knex2013";
+$baza = "gaudeam_knex";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
@@ -95,6 +102,14 @@ $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GR
 $check = mysql_query("SELECT * FROM korisnici WHERE x = $idk")or die(mysql_error());
 $in=mysql_fetch_array($check);
  //Gives error if user dosen't exist
+ $sesija=$in['sesija'];
+//echo $sesija;
+
+	
+	//$URL_REF = parse_url($_SERVER['HTTP_REFERER']);
+  //$URL_REF_HOST =   $URL_REF['path'];
+  //echo $value;
+	
 include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
@@ -485,7 +500,7 @@ if ($idk!="")
 <?php
 $prava_kor = $in['prava'];
 	
-	$a = "select * from forum_postovi where prip = 'u-$idk-$pred' order by id desc";
+	$a = "select * from forum_postovi where prip = 'u-$idk-$pred' order by id desc limit 0, 5";
 	//echo $a;
 echo "<ul id=postovi>";
 $rez = mysql_query($a) or die("<span class=podnaslovi_crveni>GREŠKA: pozivanja tablice postova!</span>");
@@ -596,7 +611,11 @@ while ($re = mysql_fetch_array($rez))
 	echo '<a onClick="gori()"; id="gori" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
 	}
 else{
-echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a>";	
+echo"	
+<script language='javascript' type='text/javascript'>
+window.location.href='http://gaudeamus.hr/mobile/index.html?backurl='+window.location.href;
+</script>";
+
 }
 mysql_close($spoj);
 
@@ -606,7 +625,7 @@ mysql_close($spoj);
  var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
 	
-    $.post("logout.php",
+    $.post("http://gaudeamus.hr/mobile/logout.php",
     {
    	
 		x:x

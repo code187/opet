@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	$URL_REF = parse_url($_SERVER['HTTP_REFERER']);
+  $URL_REF_HOST =   $URL_REF['path'];
+	$_SESSION['varname'] = $URL_REF_HOST;
+	//echo $_SESSION['varname'];
+ ?>
 <script language="javascript">
    function gor(){
        window.scrollTo(0, 0);
@@ -31,13 +38,12 @@
 
 <?php
  
-//error_reporting(0);
+error_reporting(0);
     $firstName = $_POST['x'];
 //Baza i username i password
-$baza = "gaudeam_knex2013";
+$baza = "gaudeam_knex";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
-
 
 
 
@@ -52,7 +58,12 @@ $idk = $in['x'];
 $prava_postavke =$in['prava'];
 $sesija=$in['sesija'];
 
-if ($sesija==0){
+//$URL_REF = parse_url($_SERVER['HTTP_REFERER']);
+//$URL_REF_HOST =   $URL_REF['host'];
+//echo $_SERVER['HTTP_REFERER'];
+  
+//echo $sesija;
+//if ($sesija<=1){
 	
 //$razred = $in['status'];
 //echo $razred;
@@ -163,7 +174,7 @@ if ($idk!="")
 				}
 				$a="SELECT ime,id,replace(replace(replace(replace(replace(ime,'&#268;','Cxx'),'&Scaron;','Sx'),'&#381;','Zx'),'&#272;','Dx'),'&#262;','Cx') sortiraj FROM conf_predmeta where asst='$razred' ORDER BY sortiraj ASC";	
 				//echo $a;
-				$rez = mysql_query($a) or die("<span class=podnaslovi_crveni>Greška prilikom upita u predmeta!</span>");
+				$rez = mysql_query($a) or die("<span class=podnaslovi_crveni>Greška prilikom upita u predmeta1!</span>");
 				$c = mysql_num_rows($rez);
 				
 				if ($c=="0")
@@ -196,7 +207,7 @@ if ($idk!="")
 							//echo "la $tko_pogledao_izvjestaj";
 							
 							$ac="select id from izvjestaj$unosi where ucenik=$idk";	
-							$rezc = mysql_query($ac) or die("<span class=podnaslovi_crveni>Greška prilikom upita u predmeta!</span>");
+							$rezc = mysql_query($ac) or die("<span class=podnaslovi_crveni>Greška prilikom upita u predmeta2!</span>");
 							$cc = mysql_num_rows($rezc);
 							if ($cc>0)
 							$ukupno++;
@@ -450,7 +461,15 @@ while ($re = mysql_fetch_array($rez))
 					//dodaj donji border kada su drugacije ofarbani
 					
 					if ($tko_sm=="2" or $tko_sm=="3" or $tko_sm=="4") //nastavnik
-					echo "<td align=left valign=middle width=70% height=25 style='border-bottom:1px solid #b9b9b9;'>$pt_opis</td><td valign=top width=10% style='border-bottom:1px solid #b9b9b9;'>$pt_kada</td><td style='border-bottom:1px solid #b9b9b9;'><img src=$slika width=30 border=0 align=left><br>&nbsp;$pt_tko &nbsp;&nbsp;$ispis_ured</td></tr>";
+					echo "<li id='$pt_id'><span><img src=$slika width=40 border=0><p>$pt_tko<br>$pt_kada</p></li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></span></li><script>
+ $(document).ready(function() {
+        $('#$pt_id').click(function() {
+                $('.$pt_id').slideToggle('fast');
+        });
+		//var mak=<?php echo $red_idova[0]; ?>;
+		//$('#'+mak+').show();
+    });
+</script>";
 					else
 					echo "<li id='$pt_id'><span><img src=$slika width=40 border=0><p>$pt_tko<br>$pt_kada</p></li><div style=clear:both></div><li class='$pt_id' style='display: none;'><p>$pt_opis</p></span></li><script>
  $(document).ready(function() {
@@ -467,20 +486,21 @@ while ($re = mysql_fetch_array($rez))
         
 }
 echo '<a onClick="gor()"; id="gore" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
-}
-else{
-echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a>";	
-}
+/*}
+else{	
+echo "<meta http-equiv='refresh' content='1'>";
+echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='logout.php'>Logout</a>";	
+}*/
 mysql_close($spoj);
 
 
 ?>
- <script>
+<script>
  function logout() {
  var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
-	
-    $.post("logout.php",
+	//alert(x);
+    $.post("http://gaudeamus.hr/mobile/logout.php",
     {
    	
 		x:x
