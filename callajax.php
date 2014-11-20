@@ -1,9 +1,14 @@
 <?php
+
+	session_start();
+	$_SESSION['varname'] = $_SERVER['HTTP_REFERER'];
+	
+
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
 
 //Baza i username i password
-$baza = "gaudeam_knex";
+$baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
@@ -40,13 +45,13 @@ $check = mysql_query("SELECT * FROM korisnici WHERE korisnik = '".$_POST['firstN
 
  	if ($_POST['lastName'] != $info['lozinka']) {
 
- 		die('Incorrect password, please try again.');
+ 		die('Pogrešno korisničko ime ili lozinka.');
  	}
 	else 
 
  { 
 echo $info['x'];
-session_start();
+
 
  } 
 

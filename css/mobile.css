@@ -39,7 +39,7 @@
 	float:left;
 }
 #callAjaxPage > div.ui-bar-a.ui-footer {
-	position: absolute;
+	position:relative;
 	bottom: 0px;
 	text-align: center;
 }
@@ -51,8 +51,10 @@
 	border-bottom:none;
 }
 #drugastranica > div.ui-bar-a.ui-footer{
-	bottom: 0px;
-	margin-top: 50px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	margin-top: 80px;
 	text-align: center;
 }
 #drugastranica > div.ui-bar-a.ui-footer a{
@@ -208,8 +210,10 @@
 .rub {
 	font-size: 16px;
 }
-.mjeseci {
-	
+.mjeseci table {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
 }
 #drugastranica > div.ui-bar-a.ui-footer > p {
 	color: #FFF;
@@ -232,4 +236,30 @@
 }
 #gore > img {
 	margin-right:20px;
+}
+#gori > img {
+	margin-right:20px;
+}
+#mid {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 30em;
+	height: 18em;
+	margin-top: -9em; /*set to a negative number 1/2 of your height*/
+	margin-left: -15em;
+	text-align: center;
+}
+#midd {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 30em;
+	height: 18em;
+	margin-top: -9em; /*set to a negative number 1/2 of your height*/
+	margin-left: -15em;
+	text-align: center;
+}
+#tijelo {
+	margin-bottom: 100px;	
 }

@@ -18,7 +18,7 @@ foreach( $_GET as $key => $value ) {
 $user = $_POST['x'];
 
 //Baza i username i password
-$baza = "gaudeam_knex";
+$baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
@@ -85,7 +85,7 @@ while ($repa = mysql_fetch_array($rezultat))
 						$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '$brojickorisnika'";
 						
 						$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
-						echo "<b>Prilikom zadnje prijave niste ispravno napravili odjavu iz sustava! Radi sigurnosti vaših podataka uvijek napravite odjavu.<br>Izvršite prijavu na KNEX sustav ponovno...</b><br><br>";
+						echo "<div id='midd'<b>Prilikom zadnje prijave niste ispravno napravili odjavu iz sustava! Radi sigurnosti va&#353;ih podataka uvijek napravite odjavu.<br>Izvr&#353;ite prijavu na KNEX sustav ponovno...</b><br></div>";
 
 					}
 						
@@ -98,7 +98,7 @@ while ($repa = mysql_fetch_array($rezultat))
 			}
 		else
 			{
-				$nova = date(U) + "9000";
+				$nova = date('U') + "9000";
 				$sesija_duze = "UPDATE korisnici SET sesija = '$nova'  WHERE x = '$user'";
 				$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce produljiti sesiju za korisnika</span>");
 			}
@@ -107,7 +107,7 @@ while ($repa = mysql_fetch_array($rezultat))
 //Provjera sesije ako nije odmah prekini!
 if ($user=="")
 	{
-		echo "Neovlašteni pristup ili istekla sesija! Molimo prijavite se na sustav pomo&#263;u forme!<br><br><a href=http://gaudeamus.hr/mobile/index.html>Ponovna prijava</a>";
+		echo "Neovla&#353;teni pristup ili istekla sesija! Molimo prijavite se na sustav pomo&#263;u forme!<br><br><a href=http://gaudeamus.hr/mobile/index.html>Ponovna prijava</a>";
 		unset($user);
 		//$istek = date(U)+"300"; //5min kazne da se ne loguješ
 		$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '$brojickorisnika'";

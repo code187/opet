@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	$URL_REF = parse_url($_SERVER['HTTP_REFERER']);
-  $URL_REF_HOST =   $URL_REF['path'];
-	$_SESSION['varname'] = $URL_REF_HOST;
-	//echo $_SESSION['varname'];
+	error_reporting(0);
+	if($_SESSION['varname']=="http://gaudeamus.hr/mobile/" or $_SESSION['varname']=="http://gaudeamus.hr/mobile/index.html" or $_SESSION['varname']=="http://gaudeamus.hr/mobile/treca.html" or $_SESSION['varname']=="http://gaudeamus.hr/mobile/druga.html"){
+		$_SESSION['varname'] = $_SERVER['HTTP_REFERER'];
+		$_SESSION['daj']=$_POST['x'];
  ?>
 <script language="javascript">
    function gor(){
@@ -38,12 +38,13 @@
 
 <?php
  
-error_reporting(0);
+
     $firstName = $_POST['x'];
 //Baza i username i password
-$baza = "gaudeam_knex";
+$baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
+
 
 
 
@@ -56,6 +57,11 @@ $check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or di
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
 $prava_postavke =$in['prava'];
+if($prava_postavke=="2" or $prava_postavke=="3"){
+	header("Location:http://gaudeamus.hr/mobile/adm.php"); /* Redirect browser */
+exit();
+}
+else{
 $sesija=$in['sesija'];
 
 //$URL_REF = parse_url($_SERVER['HTTP_REFERER']);
@@ -486,11 +492,11 @@ while ($re = mysql_fetch_array($rez))
         
 }
 echo '<a onClick="gor()"; id="gore" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
-/*}
+}}
 else{	
-echo "<meta http-equiv='refresh' content='1'>";
-echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='logout.php'>Logout</a>";	
-}*/
+
+echo "<div id='midd'>Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a></div>";	
+}
 mysql_close($spoj);
 
 

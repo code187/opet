@@ -1,8 +1,9 @@
 <?php 
 	session_start();
 	error_reporting(0);
-	$value = $_SESSION['varname'];
-	if ($value=="/mobile/druga.html"){
+	if($_SESSION['varname']=="http://gaudeamus.hr/mobile/druga.html" or $_SESSION['varname']=="http://gaudeamus.hr/mobile/treca.html"){
+		$link = explode("?", $_SERVER['HTTP_REFERER']);
+		$_SESSION['varname']= $link[0];
 ?>
 <script language="javascript">
    function gori(){
@@ -91,9 +92,10 @@ $(document).ready(function() {
 	//$citao=str_replace('undefined','nula',$cita);
 	
 //Baza i username i password
-$baza = "gaudeam_knex";
+$baza = "gaudeam_knex2013";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
+
 
 $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=podnaslovi_crveni>GREŠKA 003 - Vaše korisnicko ime ili lozinka za bazu su neispravni!</span>");
 
@@ -114,12 +116,12 @@ include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
 
-$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '".$_POST['x']."'";
+//$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '".$_POST['x']."'";
 						
-						$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
-						echo " ";
+						/*$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
+						echo " ";*/
 
-echo $citao;
+
 echo "<a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'><img class='logout' src='images/top1.png'></a>";
 if ($idk!="")
 	{
@@ -488,7 +490,7 @@ if ($idk!="")
 		$biljeska[$boj_mj] = str_replace("ž","&#382;",$biljeska[$boj_mj]);
 		$biljeska[$boj_mj] = str_replace("Ž","&#382;",$biljeska[$boj_mj]);
 		$biljeska[$boj_mj] = preg_replace($patterns, $replacements, $biljeska[$boj_mj]);
-		echo "<div id=$boj_mj class=rub><table border=0 width=100% cellpadding=0 cellspacing=0 style=border:none;>$biljeska[$boj_mj]</table></div>";
+		echo "<div id=$boj_mj class=rub><table><tr><td>$biljeska[$boj_mj]</td></tr></table></div>";
 		$br_mj++;
 	}
 	
@@ -610,12 +612,9 @@ while ($re = mysql_fetch_array($rez))
 	echo "<b>GREŠKA u sustavu ili ne ovlašteni ulaz!</b>";*/
 	echo '<a onClick="gori()"; id="gori" href="#"><img src="images/arow.png" style="float:right;" title="Top" alt="Top" /></a>';
 	}
-else{
-echo"	
-<script language='javascript' type='text/javascript'>
-window.location.href='http://gaudeamus.hr/mobile/index.html?backurl='+window.location.href;
-</script>";
+else{	
 
+echo "Prilikom zadnjeg korištenja niste napravili <a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Logout</a>";	
 }
 mysql_close($spoj);
 
