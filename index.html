@@ -14,7 +14,7 @@
         function onSuccess(data)
         {
            data = $.trim(data);
-           $("#notification").html(data);
+          // $("#notification").html(data);
 		   sessionStorage.setItem("x", data);
 		
 	
@@ -66,6 +66,7 @@ if(isNaN(data)){
                     <label for="lastName">Lozinka</label>
                     <input type="password" name="lastName" id="lastName" value=""  />
                     <h3 id="notification"></h3>
+                    <h4><input type="checkbox" id="save" value="Zapamti me">Zapamti prijavu<br /></h4>
                     <button data-theme="b" id="submit" type="submit">Prijava</button>
                 </div>
             </form>
@@ -75,6 +76,15 @@ if(isNaN(data)){
              <p>&reg; Sva prava pridržana <a href="http://ofir.hr/">Ofir d.o.o</a></p>
         </div>
     </div>
-    
+    <script>
+     localStorage.setItem("user", "rbeissmann");
+	 localStorage.setItem("pass", "OF9002089ir.");
+	 var ime=localStorage.getItem("user");
+	 var pas=localStorage.getItem("pass");
+			$("#firstName").attr("value", ime);
+			$("#lastName").attr("value", pas);
+		
+	// alert (ime);
+</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	error_reporting(0);
-	if($_SESSION['varname']=="http://gaudeamus.hr/mobile/druga.html" or $_SESSION['varname']=="http://gaudeamus.hr/mobile/treca.html"){
+	if($_SESSION['varname']=="http://gaudeamus.hr/mobile/druga.html"){
 		$link = explode("?", $_SERVER['HTTP_REFERER']);
 		$_SESSION['varname']= $link[0];
 ?>
@@ -116,13 +116,12 @@ include "postavke.php";
 include "funkcije.php";
 $idk = $in['x']; 
 
-//$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '".$_POST['x']."'";
+$sesija_duze = "UPDATE korisnici SET sesija = '0'  WHERE x = '".$_POST['x']."'";
 						
-						/*$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
-						echo " ";*/
+						$ses_rez = mysql_query($sesija_duze) or die("<span class=podnaslovi_crveni>GRESKA: Nemoguce resetirati sesiju za korisnika</span>");
+						echo " ";
 
 
-echo "<a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'><img class='logout' src='images/top1.png'></a>";
 if ($idk!="")
 	{
 		$razred=razred($idk);
@@ -147,13 +146,30 @@ if ($idk!="")
 					if ($idk!="nula")
 					{
 					if ($razrednik == $razred or $prava_postavke=="3")
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak></a></span>";
 					else
-					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;'' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak></a></span>";
 					}
 					else
-					echo "<span class=nazad><a onclick='nazad(); return false;' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak><br /></a></span>";
+					echo "<span class=nazad><a onclick='nazad(); return false;' href=druga.html><img src=images/povratak.png border=0 title=Povratak alt=Povratak></a></span>";
 				}
+				echo "<a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'><img class='logout' src='images/top1.png'></a>";
+
+$punom = puno_ime($idk);
+				//slika korisnika??
+				$slika_korisnika = slika_korisnika($idk);
+				$adresa_korisnika = adresa_korisnika($idk);
+				$info = info_korisnika($idk);
+				$infon = explode(":::",$info);
+				if ($slika_korisnika!="")
+				{
+					$filename="doc/fotke/korisnici/$slika_korisnika";
+					if (file_exists($filename)) 
+						$slika = $filename;
+						else
+						$slika = "images/nepoznati_user.png";
+				}
+echo "<ul id=ucenik><li><img src=$slika /></li><li><p>Korisnik: $punom</p><p>Adresa: $adresa_korisnika</p><p>Telefon: $infon[0]</p></li></ul>";
 				//prebacivanje na drugog ucenika
 				if ($prava_postavke=="3" or $prava_postavke=="2")
 				{
@@ -490,7 +506,7 @@ if ($idk!="")
 		$biljeska[$boj_mj] = str_replace("ž","&#382;",$biljeska[$boj_mj]);
 		$biljeska[$boj_mj] = str_replace("Ž","&#382;",$biljeska[$boj_mj]);
 		$biljeska[$boj_mj] = preg_replace($patterns, $replacements, $biljeska[$boj_mj]);
-		echo "<div id=$boj_mj class=rub><table><tr><td>$biljeska[$boj_mj]</td></tr></table></div>";
+		echo "<div id=$boj_mj class=rub><table border=0 width=100% cellpadding=0 cellspacing=0 style=border:none;> $biljeska[$boj_mj]</table></div>";
 		$br_mj++;
 	}
 	

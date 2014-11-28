@@ -53,13 +53,14 @@ $spoj = mysql_connect("localhost","$korisnik","$lozinka") or die ("<span class=p
 $baza = mysql_select_db("$baza", $spoj) or die("<span class=podnaslovi_crveni>GREŠKA 002 - Baza nije pronadena na serveru!</span>");
 
 
-$check = mysql_query("SELECT * FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
+$check = mysql_query("SELECT x, prava FROM korisnici WHERE x = '".$_POST['x']."'")or die(mysql_error());
 $in=mysql_fetch_array($check);
 $idk = $in['x'];
 $prava_postavke =$in['prava'];
 if($prava_postavke=="2" or $prava_postavke=="3"){
-	header("Location:http://gaudeamus.hr/mobile/adm.php"); /* Redirect browser */
-exit();
+	echo"<div id='midd'>
+	<h3>Poštovani, aplikacija je trenutno namjenjena za učenike i roditelje.</h3><br />
+    <h4><a onclick='logout()' href='http://gaudeamus.hr/mobile/logout.php'>Povratak</a></h4></div>";
 }
 else{
 $sesija=$in['sesija'];
@@ -232,6 +233,7 @@ if ($idk!="")
 						$ime_za_fotku = str_replace("&#382;","z",$ime_za_fotku);
 						$ime_za_fotku = str_replace("&scaron;","s",$ime_za_fotku);
 						$ime_za_fotku = str_replace("š","s",$ime_za_fotku);
+						$ime_za_fotku = str_replace("Š","s",$ime_za_fotku);
 						$ime_za_fotku = str_replace("&#273;","d",$ime_za_fotku);
 						$fajl="images/$ime_za_fotku.png"; //gdje je fotka?
 						//echo $fajl;
@@ -362,7 +364,7 @@ if ($idk!="")
 						}
 						else
 						//NI OVDJE NE RADI EHO OD ID-A
-							echo "$id<li><a onclick=SendTo(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
+							echo "<li><a onclick=SendTo(); href=http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id><img src='images/$slikapredmeta'><br>$puno_ime</a></li><script language='javascript'>
    function SendTo(){
        window.location=\"http://gaudeamus.hr/mobile/treca.html?p=ucenik_detalji&m=nastava&idk=$idk&razred=$razred&pred=$id\"
     }
@@ -527,3 +529,4 @@ mysql_close($spoj);
  }
 
 </script>
+<div id="zadnji"></div>

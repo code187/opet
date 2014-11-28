@@ -55,7 +55,7 @@
 	 var x =sessionStorage.getItem("x");	
 	 var x =sessionStorage.getItem("x");
 	$(document).ready(function(){
-    $.post("http:gaudeamus.hr/mobile/drugaa.php",
+    $.post("http://gaudeamus.hr/mobile/drugaa.php",
     {
    		ak:ak,
 		p:p,
@@ -91,15 +91,19 @@
         </div>
         <div data-role="content">
         <div id="tijelo">
-        
+        <img src="images/loading.gif" id="loading" class="hidden">
+        <script>
+        document.getElementById("loading").className="visible";var hide=function(){document.getElementById("loading").className="hidden"};var oldLoad=window.onload;var newLoad=oldLoad?function(){hide.call(this);oldLoad.call(this)}:hide;window.onload=newLoad; 
+		</script>
         </div>
-        
+
         </div>
   		
-        <div data-role="footer">
+        <div id="foot" data-role="footer">
         
             <p>&reg; Sva prava pridržana <a href="http://ofir.hr/">Ofir d.o.o</a></p>
         </div>
     </div>
+    
 </body>
 </html>
