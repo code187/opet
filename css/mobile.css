@@ -270,12 +270,12 @@ display:none;
 .visible {
 	display: block;
 	position: absolute;
-	top: 40%;
-	left: 40%;
+	top: 25%;
+	left: 25%;
 	
 }
 #foot {
-   position:fixed;
+   position:relative;
    left:0px;
    bottom:0px;
    width:100%;

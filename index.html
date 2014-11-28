@@ -8,7 +8,7 @@
       <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
     <meta charset="utf-8">
 </head>
-<body>
+<body onload="funkcija()">
     <script>
 	
         function onSuccess(data)
@@ -66,25 +66,35 @@ if(isNaN(data)){
                     <label for="lastName">Lozinka</label>
                     <input type="password" name="lastName" id="lastName" value=""  />
                     <h3 id="notification"></h3>
-                    <h4><input type="checkbox" id="save" value="Zapamti me">Zapamti prijavu<br /></h4>
-                    <button data-theme="b" id="submit" type="submit">Prijava</button>
+                    <h4><input type="checkbox" id="save" value="Zapamti">Zapamti prijavu<br /></h4>
+                    <button data-theme="b" id="submit" type="submit" onclick="myFunction()" value="Prijava">Prijava</button>
                 </div>
             </form>
         </div>
-  
         <div data-role="footer">
              <p>&reg; Sva prava pridržana <a href="http://ofir.hr/">Ofir d.o.o</a></p>
         </div>
     </div>
     <script>
-     localStorage.setItem("user", "rbeissmann");
-	 localStorage.setItem("pass", "OF9002089ir.");
-	 var ime=localStorage.getItem("user");
+	function myFunction() {
+	if (document.getElementById("save").checked != false){
+		var user=document.getElementById("firstName").value;
+		var pass=document.getElementById("lastName").value;
+		localStorage.setItem("user", user);
+	 	localStorage.setItem("pass", pass);
+	
+			alert(ime+pas);
+		}
+		else{
+     
+		}}
+	// alert (ime);
+	function funkcija(){
+		 var ime=localStorage.getItem("user");
 	 var pas=localStorage.getItem("pass");
 			$("#firstName").attr("value", ime);
 			$("#lastName").attr("value", pas);
-		
-	// alert (ime);
+		}
 </script>
 </body>
 </html>

@@ -529,4 +529,3 @@ mysql_close($spoj);
  }
 
 </script>
-<div id="zadnji"></div>
