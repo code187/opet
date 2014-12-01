@@ -41,7 +41,7 @@
 
     $firstName = $_POST['x'];
 //Baza i username i password
-$baza = "gaudeam_knex2013";
+$baza = "gaudeam_knex";
 $korisnik = "gaudeam_knex";
 $lozinka = "@00886726@";
 
