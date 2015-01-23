@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Gaudeamus-Knex</title>
+    <title>Sale Club</title>
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
       <link href="css/mobile.css" rel="stylesheet" type="text/css">
       <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
@@ -19,10 +19,10 @@
 		
 	
 if(isNaN(data)){
-
+	window.location.replace("treca.html");
 }else{
 				
-			window.location.replace("http://gaudeamus.hr/mobile/druga.html");
+			window.location.replace("druga.html");
         }
   }
         function onError(data, status)
@@ -37,7 +37,7 @@ if(isNaN(data)){
   
                 $.ajax({
                     type: "POST",
-                    url: "http://gaudeamus.hr/mobile/callajax.php",
+                    url: "http://sale-club.eu/provjera.php",
                     cache: false,
                     data: formData,
                     success: onSuccess,
@@ -52,19 +52,19 @@ if(isNaN(data)){
     <script src="phonegap.js"></script>
     <!-- call ajax page -->
     <div data-role="page" id="callAjaxPage">
-        <div data-role="header">
-          <img class="logo" src="images/logo3.png">
-            <p>Gimnazija Gaudeamus - Knex</p>
+        <div id="prvaheader" data-role="header">
+          <img src="images/logo2.png">
+            
         </div>
   
         <div data-role="content">
             <form id="callAjaxForm">
                 <div data-role="fieldcontain">
-                    <label for="firstName">Korisničko ime</label>
-                    <input type="text" name="firstName" id="firstName" value=""  />
+                    <label for="email">Vaš e-mail</label>
+                    <input type="text" name="email" id="email" value=""  />
  
-                    <label for="lastName">Lozinka</label>
-                    <input type="password" name="lastName" id="lastName" value=""  />
+                    <label for="pass">Lozinka</label>
+                    <input type="password" name="pass" id="pass" value=""  />
                     <h3 id="notification"></h3>
                     <h4><input type="checkbox" id="save" value="Zapamti">Zapamti prijavu<br /></h4>
                     <button data-theme="b" id="submit" type="submit" onclick="myFunction()" value="Prijava">Prijava</button>
@@ -78,9 +78,9 @@ if(isNaN(data)){
     <script>
 	function myFunction() {
 	if (document.getElementById("save").checked != false){
-		var user=document.getElementById("firstName").value;
-		var pass=document.getElementById("lastName").value;
-		localStorage.setItem("user", user);
+		var email=document.getElementById("email").value;
+		var pass=document.getElementById("pass").value;
+		localStorage.setItem("email", email);
 	 	localStorage.setItem("pass", pass);
 	
 			alert(ime+pas);
@@ -90,10 +90,10 @@ if(isNaN(data)){
 		}}
 	// alert (ime);
 	function funkcija(){
-		 var ime=localStorage.getItem("user");
-	 var pas=localStorage.getItem("pass");
-			$("#firstName").attr("value", ime);
-			$("#lastName").attr("value", pas);
+		 var email=localStorage.getItem("email");
+	 var pass=localStorage.getItem("pass");
+			$("#email").attr("value", email);
+			$("#pass").attr("value", pass);
 		}
 </script>
 </body>
