@@ -1,0 +1,135 @@
+@charset "utf-8";
+.ui-content {
+	background-color: #f1e7dc;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	padding:0;
+}
+.logout {
+	float: right;
+	margin-right: 15px;
+}
+.logout2 {
+	float: right;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 15px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+.nazad {
+	margin-left: 15px;
+}
+.ui-body-c {
+	background-color: #f1e7dc;
+	background-image:none;
+}
+.ui-header {
+	text-align: center;
+		
+}
+ .ui-page .ui-header {
+        background: #cc2e00 !important;
+		border:none;
+		padding:10px;
+    }
+#prvaheader {
+	padding:0;
+}
+#popust {
+	margin-bottom:15px;
+}
+[data-role=page]{height: 100% !important; position:relative !important;}
+[data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;} 
+.ui-page .ui-footer  {
+	text-align: center;
+	background-image: url(../images/podloga.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	background-color: transparent;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+    }
+.ui-page .ui-footer img {
+	float:left;
+}
+.ui-page .ui-footer p{ 
+	margin-top:30px;
+}
+.ui-page .ui-header h1{ 
+		font-size:100%;
+		display:inline;
+	}
+.ui-page-theme-a .ui-header.ui-bar-inherit{
+	background-color:white;
+}
+#callAjaxForm > div{
+	height: 100%;
+	padding-top: 25%;
+	padding-bottom: 25%;
+}
+.logo {
+	float:left;
+}
+#callAjaxPage > div.ui-bar-a.ui-footer {
+	position: absolute;
+	bottom: 0px;
+	text-align: center;
+}
+#callAjaxPage > div.ui-bar-a.ui-footer a{
+	color: #FFF;
+	text-decoration: none;	
+}
+.ui-br {
+	border-bottom:none;
+}
+.menu ul {
+	list-style-type: none;
+	width: 100%;
+	text-align: center;	
+	display: block;	
+}
+.menu ul li {
+	float:left;
+}
+.menu ul li a {
+	font-size: 10px;
+		
+}
+#callAjaxForm {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	text-align: center;
+}
+.hidden {
+display:none;
+}
+.visible {
+	display: block;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	
+}
+@media screen and (min-width: 550px) {
+#trecaheader, #popust { 
+	display:none;
+}
+#trecafooter {
+	display:none;
+}
+@media screen and (min-width: 650px) {
+#treca, #popust { 
+	display:none;
+}
+#trecafooter {
+	display:none;
+}
+}
